@@ -10,7 +10,7 @@ import PageNumbers2 from '../../../components/PageNumbers2/PageNumbers2';
 import Hyperlink from '../../../components/Hyperlink/Hyperlink';
 import PageNavigationButtons from '../../../components/PageNavigationButtons/PageNavigationButtons';
 
-function DegreeInfo() {
+function EditDegree() {
   const navigate = useNavigate();
 
   // Set path & get degree from DegreeContext
@@ -37,13 +37,13 @@ function DegreeInfo() {
   }
 
   return (
-    <main className='degreeInfo__wrapper'>
+    <main className='editDegree__wrapper'>
       <WavesHeader
         title='Saukko'
         secondTitle={'Tutkintojen hallinta'}
         fill='#FFC61E'
       />
-      <section className='degreeInfo__container'>
+      <section className='editDegree__container'>
         <PageNumbers2
           activePage={1}
           totalPages={4}
@@ -54,8 +54,10 @@ function DegreeInfo() {
             'Vahvista',
           ]}
         />
-        <div className='degreeInfo__container--info'>
-          <div className='degreeInfo__container--info--block'></div>
+        <div className='editDegree__container--info'>
+          <div className='editDegree__container--info--block'></div>
+
+          <h4>Muokkaa tuntkintoa</h4>
           <label htmlFor=''>Tutkinnon nimi *</label>
 
           <input
@@ -63,9 +65,7 @@ function DegreeInfo() {
             type='text'
             onChange={(e) => {}}
           />
-          <p>{degreeFound ? degree.name.fi : 'ei dataa APIsta'}</p>
-
-          <div className='degreeInfo__container--info--block'>
+          <div className='editDegree__container--info--block'>
             <h2>Määräyksen diaarinumero</h2>
             <p>{degreeFound ? degree.diaryNumber : 'ei dataa APIsta'}</p>
           </div>
@@ -75,7 +75,7 @@ function DegreeInfo() {
             {degreeFound ? parseDate(degree.regulationDate) : 'ei dataa APIsta'}
           </p>
 
-          <div className='degreeInfo__container--info--block'>
+          <div className='editDegree__container--info--block'>
             <h2>Voimaantulo</h2>
             <p>
               {degreeFound ? parseDate(degree.validFrom) : 'ei dataa APIsta'}
@@ -85,7 +85,7 @@ function DegreeInfo() {
           <h2>Voimassaolon päättyminen</h2>
           <p>{degreeFound ? parseDate(degree.expiry) : 'ei dataa APIsta'}</p>
 
-          <div className='degreeInfo__container--info--block'>
+          <div className='editDegree__container--info--block'>
             <h2>Siirtymäajan päättymisaika</h2>
             <p>
               {degreeFound
@@ -111,4 +111,4 @@ function DegreeInfo() {
   );
 }
 
-export default DegreeInfo;
+export default EditDegree;
