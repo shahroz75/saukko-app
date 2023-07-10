@@ -40,7 +40,7 @@ function DegreeInfo() {
     <main className='degreeInfo__wrapper'>
       <WavesHeader
         title='Saukko'
-        secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
+        secondTitle={'Tutkintojen hallinta'}
         fill='#FFC61E'
       />
       <section className='degreeInfo__container'>
