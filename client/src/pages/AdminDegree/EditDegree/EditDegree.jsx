@@ -54,18 +54,53 @@ function EditDegree() {
             'Vahvista',
           ]}
         />
-        <div className='editDegree__container--info'>
-          <div className='editDegree__container--info--block'></div>
-
+        <div className='editDegree__container--form'>
           <h4>Muokkaa tuntkintoa</h4>
-          <label htmlFor=''>Tutkinnon nimi *</label>
 
+          <label htmlFor=''>Tutkinnon nimi *</label>
           <input
             value={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
             type='text'
             onChange={(e) => {}}
           />
-          <div className='editDegree__container--info--block'>
+          <label htmlFor=''>Määräyksen diaarinumero *</label>
+          <input
+            value={degreeFound ? degree.diaryNumber : 'ei dataa APIsta'}
+            type='text'
+            onChange={(e) => {}}
+          />
+          <label htmlFor=''>Määräyksen päätöspäivämäärä *</label>
+          <input
+            value={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
+            type='text'
+            onChange={(e) => {}}
+          />
+          <label htmlFor=''>Voimanantulo *</label>
+          <input
+            value={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
+            type='text'
+            onChange={(e) => {}}
+          />
+          <label htmlFor=''>Voimassaolon päättyminen *</label>
+          <input
+            value={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
+            type='text'
+            onChange={(e) => {}}
+          />
+          <label htmlFor=''>Siirtymäaja päättymisaika *</label>
+          <input
+            value={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
+            type='text'
+            onChange={(e) => {}}
+          />
+          <label htmlFor=''>Tutkinnon suorittaneen osaaminen *</label>
+          <textarea
+            value={''}
+            onChange={(e) => {}}
+            cols='30'
+            rows='10'
+          ></textarea>
+          {/* <div className='editDegree__container--info--block'>
             <h2>Määräyksen diaarinumero</h2>
             <p>{degreeFound ? degree.diaryNumber : 'ei dataa APIsta'}</p>
           </div>
@@ -92,13 +127,8 @@ function EditDegree() {
                 ? parseDate(degree.transitionEnds)
                 : 'ei dataa APIsta'}
             </p>
-          </div>
+          </div> */}
         </div>
-
-        <Hyperlink
-          linkText={'Lue lisää tästä linkistä'}
-          linkSource={degree.examInfoURL}
-        />
 
         <PageNavigationButtons
           handleBack={() => navigate('/degrees')}

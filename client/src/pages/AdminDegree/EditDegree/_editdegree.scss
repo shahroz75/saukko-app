@@ -1,7 +1,7 @@
 .editDegree__wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
 
@@ -11,39 +11,28 @@
     margin-top: 200px;
     margin-bottom: 50px;
     width: 100%;
-    flex-grow: 1;
     overflow-y: auto;
 
-    .editDegree__container--info {
+    .editDegree__container--form {
       display: flex;
       flex-direction: column;
-      text-align: left;
-      margin: 30px 0px;
-
-      .editDegree__container--info--block {
-        padding: 10px 0px;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-
-        h1 {
-          margin-bottom: 15px;
-          text-align: center;
-          text-decoration: underline;
-        }
-
-        &.dark {
-          background-color: var(--grayscale-background-box);
-        }
+      gap: 10px;
+      padding: 43px 36px 18px 36px;
+      input {
+        width: 100%;
+        height: 56px;
+        background: none;
+        color: var(--saukko-main-black);
+        border: 2px solid var(--saukko-main-black);
+      }
+      textarea {
+        padding: 7px;
+        color: var(--saukko-main-black);
+        border: 2px solid var(--saukko-main-black);
       }
     }
-
-    h1,
-    h2,
-    p {
-      margin-left: 15px;
-      margin-right: 15px;
-      font-size: var(--base-font-size);
+    h4 {
+      text-align: center;
     }
   }
 }
