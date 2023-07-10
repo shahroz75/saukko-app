@@ -52,7 +52,7 @@ const WavesHeader = (props) => {
       case 'supervisor':
         return '#f5a3c7';
       default:
-        return '#9fc9eb';
+        return props.fill;
     }
   };
 
@@ -73,7 +73,6 @@ const WavesHeader = (props) => {
       <h1>{props.title}</h1>
       <h2>{props.secondTitle}</h2>
       <Waves fill={headerColor} />
-
     </main>
   );
 };
@@ -83,10 +82,3 @@ WavesHeader.defaultProps = {
 };
 
 export default WavesHeader;
-
-
-
-
-
-
-
