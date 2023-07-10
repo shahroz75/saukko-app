@@ -1,16 +1,17 @@
 // Import react packages
 import React, { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import useStore from '../../../useStore';
 
 // Import components
 import DegreeContext from '../../../utils/context/DegreeContext';
 import WavesHeader from '../../../components/Header/WavesHeader';
 import UserNav from '../../../components/UserNav/UserNav';
 import PageNumbers2 from '../../../components/PageNumbers2/PageNumbers2';
-import Hyperlink from '../../../components/Hyperlink/Hyperlink';
 import PageNavigationButtons from '../../../components/PageNavigationButtons/PageNavigationButtons';
 
 function EditDegree() {
+  const { degreeName } = useStore();
   const navigate = useNavigate();
 
   // Set path & get degree from DegreeContext

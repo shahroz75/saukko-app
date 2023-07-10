@@ -24,6 +24,9 @@ const useStore = create((set) => ({
   education: '',
   openNotificationModal: false,
 
+  // Admin degree states
+  degreeName: '',
+
   // Define setter functions to update state variables
   setRole: (role) => set({ role }),
   setName: (name) => set({ name }),
@@ -46,6 +49,9 @@ const useStore = create((set) => ({
   setEducation: (education) => set({ education }),
   setOpenNotificationModal: (openNotificationModal) =>
     set({ openNotificationModal }),
+
+  // Admin degree set states
+  setDegreeName: (degreeName) => set({ degreeName }),
 
   // Define a resetForm function to reset all state variables to their initial values
   resetForm: () =>
