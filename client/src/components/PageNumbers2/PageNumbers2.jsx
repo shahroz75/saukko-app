@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
 import DegreeContext from '../../utils/context/DegreeContext';
 
-const PageNumbers = ({ activePage }) => {
+const PageNumbers2 = ({ activePage, pageTexts }) => {
   const navigate = useNavigate();
 
   // Get degree from DegreeContext
@@ -42,6 +42,12 @@ const PageNumbers = ({ activePage }) => {
             3
           </span>
         </div>
+        <div className={`line ${activePage >= 4 ? 'active' : ''}`} />
+        <div className={`circle ${activePage >= 4 ? 'active' : ''}`}>
+          <span className={`number ${activePage === 4 ? 'active' : ''}`}>
+            4
+          </span>
+        </div>
       </div>
       <div>
         <div className='page-numbers__wrapper--text'>
@@ -49,13 +55,13 @@ const PageNumbers = ({ activePage }) => {
             className={`page-text ${activePage >= 1 ? 'active' : ''}`}
             onClick={() => navigate(`/degrees/${degree._id}`)}
           >
-            Valitse tutkinto
+            {pageTexts[0]}
           </span>
           <span
             className={`page-text ${activePage >= 2 ? 'active' : ''}`}
             onClick={() => navigate(`/degrees/${degree._id}/units`)}
           >
-            Valitse tutkinnonosat
+            {pageTexts[1]}
           </span>
           <span
             className={`page-text ${activePage === 3 ? 'active' : ''}`}
@@ -63,7 +69,15 @@ const PageNumbers = ({ activePage }) => {
               navigate(`/degrees/${degree._id}/units/confirm-selection`)
             }
           >
-            Vahvista pyyntö
+            {pageTexts[2]}
+          </span>
+          <span
+            className={`page-text ${activePage === 4 ? 'active' : ''}`}
+            onClick={() =>
+              navigate(`/degrees/${degree._id}/units/confirm-selection`)
+            }
+          >
+            {pageTexts[3]}
           </span>
         </div>
       </div>
@@ -71,8 +85,9 @@ const PageNumbers = ({ activePage }) => {
   );
 };
 
-PageNumbers.propTypes = {
+PageNumbers2.propTypes = {
   activePage: PropTypes.number.isRequired,
+  pageTexts: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default PageNumbers;
+export default PageNumbers2;
