@@ -54,44 +54,36 @@ function DegreeInfo() {
           ]}
         />
         <div className='degreeInfo__container--info'>
-          <div className='degreeInfo__container--info--block'>
-            <h1>Tutkinnon suorittaneen osaaminen</h1>
-            <p>
-              Lorem ipsum dolor sit amet, pri eu aperiri ancillae, eu omnes
-              integre eam, vis et esse primis legendos. His commodo maiestatis
-              te, graeco persius iudicabit sed ea. Nec te nihil discere
-              interesset. Veniam signiferumque eam cu. Legere debitis delectus
-              ei his, laoreet debitis apeirian quo te. No putant fastidii
-              invenire vis, mei te facete molestie vituperatoribus, vitae
-              euismod an mei.
-            </p>
-          </div>
-          <div className='degreeInfo__container--info--block dark'>
-            <h2>Perusteen nimi</h2>
-            <p>{degreeFound ? degree.name.fi : 'ei dataa APIsta'}</p>
-          </div>
+          <div className='degreeInfo__container--info--block'></div>
+          <label htmlFor=''>Tutkinnon nimi *</label>
+
+          <input
+            value={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
+            type='text'
+            onChange={(e) => {}}
+          />
+          <p>{degreeFound ? degree.name.fi : 'ei dataa APIsta'}</p>
+
           <div className='degreeInfo__container--info--block'>
             <h2>Määräyksen diaarinumero</h2>
             <p>{degreeFound ? degree.diaryNumber : 'ei dataa APIsta'}</p>
           </div>
-          <div className='degreeInfo__container--info--block dark'>
-            <h2>Määräyksen päätöspäivämäärä</h2>
-            <p>
-              {degreeFound
-                ? parseDate(degree.regulationDate)
-                : 'ei dataa APIsta'}
-            </p>
-          </div>
+
+          <h2>Määräyksen päätöspäivämäärä</h2>
+          <p>
+            {degreeFound ? parseDate(degree.regulationDate) : 'ei dataa APIsta'}
+          </p>
+
           <div className='degreeInfo__container--info--block'>
             <h2>Voimaantulo</h2>
             <p>
               {degreeFound ? parseDate(degree.validFrom) : 'ei dataa APIsta'}
             </p>
           </div>
-          <div className='degreeInfo__container--info--block dark'>
-            <h2>Voimassaolon päättyminen</h2>
-            <p>{degreeFound ? parseDate(degree.expiry) : 'ei dataa APIsta'}</p>
-          </div>
+
+          <h2>Voimassaolon päättyminen</h2>
+          <p>{degreeFound ? parseDate(degree.expiry) : 'ei dataa APIsta'}</p>
+
           <div className='degreeInfo__container--info--block'>
             <h2>Siirtymäajan päättymisaika</h2>
             <p>
