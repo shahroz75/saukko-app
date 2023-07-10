@@ -41,6 +41,7 @@ function DegreeInfo() {
       <WavesHeader
         title='Saukko'
         secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
+        fill='#FFC61E'
       />
       <section className='degreeInfo__container'>
         <PageNumbers2
