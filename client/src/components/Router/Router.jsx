@@ -36,8 +36,6 @@ import ContractInfo from '../../pages/ContractInfo/ContractInfo';
 import UpdateHomePageAfterLoggedIn from '../../pages/UpdateHomePageAfterLogin/UpdateHomepageAfterLogin';
 import UpdateHomePageAfterLogin from '../../pages/UpdateHomePageAfterLogin/UpdateHomepageAfterLogin';
 
-
-
 const Router = () => {
   let location = useLocation();
   const { loggedIn } = useContext(AuthContext);
@@ -65,21 +63,25 @@ const Router = () => {
     <>
       <Routes key={location.pathname} location={location}>
         {/* placeholder paths and pages */}
-
         <Route path='/test-page' element={<TestPage />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/first-login' element={<FirstLogin />} />
         <Route path='/reset-password/:token' element={<ResetPassword />} />
         <Route path='/logged-user' element={<HomePageAfterLoggedIn />} />
-        <Route path='/update-logged-user' element={<UpdateHomePageAfterLogin />} />
+        <Route
+          path='/update-logged-user'
+          element={<UpdateHomePageAfterLogin />}
+        />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/contract-info' element={<ContractInfo />} />
-        <Route path='/degrees' element={<SearchPage />} />
+        {/* <Route path='/degrees' element={<SearchPage />} />
         <Route path='/degrees/:degreeId' element={<DegreeInfo />} />
         <Route path='/degrees/:degreeId/units' element={<DegreeUnits />} />
         <Route path='/degrees/:degreeId/units/:unitId' element={<UnitInfo />} />
-        <Route path='/degrees/:degreeId/units/confirm-selection' element={<ConfirmSelection />} />
-
+        <Route
+          path='/degrees/:degreeId/units/confirm-selection'
+          element={<ConfirmSelection />} */}
+        />
         {!loggedIn && (
           <>
             <Route exact='true' path='/' element={<LandingPage />} />
@@ -117,6 +119,17 @@ const Router = () => {
             <Route path='/account-created' element={<AccountCreated />} />
             <Route path='/userdashboard' element={<UserDashboard />} />
             <Route path='/contract-info' element={<ContractInfo />} />
+            <Route path='/degrees' element={<SearchPage />} />
+            <Route path='/degrees/:degreeId' element={<DegreeInfo />} />
+            <Route path='/degrees/:degreeId/units' element={<DegreeUnits />} />
+            <Route
+              path='/degrees/:degreeId/units/:unitId'
+              element={<UnitInfo />}
+            />
+            <Route
+              path='/degrees/:degreeId/units/confirm-selection'
+              element={<ConfirmSelection />}
+            />
           </>
         )}
       </Routes>
