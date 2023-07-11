@@ -49,9 +49,9 @@ function EditDegree() {
           activePage={1}
           totalPages={4}
           pageTexts={[
-            'Muokkaa tutkinto',
+            'Tutkintotiedot',
             'Valitse tutkinnonosat',
-            'Muokkaa tutkinnonosat',
+            'Muokkaa tietoja',
             'Vahvista',
           ]}
         />

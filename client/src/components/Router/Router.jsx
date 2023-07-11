@@ -65,7 +65,7 @@ const Router = () => {
       <Routes key={location.pathname} location={location}>
         {/* placeholder paths and pages */}
 
-        <Route path='/test-page' element={<TestPage />} />
+        {/* <Route path='/test-page' element={<TestPage />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/first-login' element={<FirstLogin />} />
         <Route path='/reset-password/:token' element={<ResetPassword />} />
@@ -83,7 +83,7 @@ const Router = () => {
         <Route
           path='/degrees/:degreeId/units/confirm-selection'
           element={<ConfirmSelection />}
-        />
+        /> */}
         <Route path='/edit-degrees/:degreeId' element={<EditDegree />} />
 
         {!loggedIn && (
@@ -123,6 +123,7 @@ const Router = () => {
             <Route path='/account-created' element={<AccountCreated />} />
             <Route path='/userdashboard' element={<UserDashboard />} />
             <Route path='/contract-info' element={<ContractInfo />} />
+            {/* <Route path='/edit-degrees/:degreeId' element={<EditDegree />} /> */}
           </>
         )}
       </Routes>
