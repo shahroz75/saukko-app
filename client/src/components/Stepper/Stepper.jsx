@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
 import DegreeContext from '../../utils/context/DegreeContext';
 
-const PageNumbers = ({ activePage, labelStepper }) => {
+const Stepper = ({ activePage, labelStepper }) => {
   const navigate = useNavigate();
 
   // Get degree from DegreeContext
@@ -85,9 +85,9 @@ const PageNumbers = ({ activePage, labelStepper }) => {
   );
 };
 
-PageNumbers.propTypes = {
+Stepper.propTypes = {
   activePage: PropTypes.number.isRequired,
   labelStepper: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default PageNumbers;
+export default Stepper;

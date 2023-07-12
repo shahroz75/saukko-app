@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DegreeContext from '../../../utils/context/DegreeContext';
 import WavesHeader from '../../../components/Header/WavesHeader';
 import UserNav from '../../../components/UserNav/UserNav';
-import PageNumbers from '../../../components/PageNumbers/PageNumbers';
+import Stepper from '../../../components/Stepper/Stepper';
 import Hyperlink from '../../../components/Hyperlink/Hyperlink';
 import PageNavigationButtons from '../../../components/PageNavigationButtons/PageNavigationButtons';
 
@@ -52,7 +52,7 @@ function DegreeInfo() {
         secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
       />
       <section className='degreeInfo__container'>
-        <PageNumbers
+        <Stepper
           activePage={1}
           totalPages={3}
           labelStepper={textStepper.admin}
