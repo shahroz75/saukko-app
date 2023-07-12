@@ -17,7 +17,7 @@ function DegreeInfo() {
   const { setDegreeId, degree, degreeFound } = useContext(DegreeContext);
   const params = useParams();
   // Define different text for stepper's labels
-  const textStepper = {
+  const labelStepper = {
     admin: [
       'Tutkintotiedot',
       'Valitse tutkinnonosat',
@@ -52,11 +52,7 @@ function DegreeInfo() {
         secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
       />
       <section className='degreeInfo__container'>
-        <Stepper
-          activePage={1}
-          totalPages={3}
-          labelStepper={textStepper.admin}
-        />
+        <Stepper activePage={1} totalPages={4} label={labelStepper.admin} />
 
         <div className='degreeInfo__container--info'>
           <div className='degreeInfo__container--info--block'>

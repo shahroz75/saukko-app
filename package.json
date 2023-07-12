@@ -9,7 +9,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@iconify/react": "^4.1.0",
+        "@iconify/react": "^4.1.1",
         "husky": "^8.0.3",
         "lint-staged": "^13.2.2",
         "prettier": "^2.8.8"
@@ -18,5 +18,8 @@
         "*.{js,jsx}": [
             "prettier --write"
         ]
+    },
+    "dependencies": {
+        "@iconify/icons-mdi": "^1.2.47"
     }
 }

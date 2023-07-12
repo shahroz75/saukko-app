@@ -1,84 +1,65 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
+import checkboxMarkedCircleOutline from '@iconify/icons-mdi/checkbox-marked-circle-outline';
 import PropTypes from 'prop-types';
 import DegreeContext from '../../utils/context/DegreeContext';
 
-const Stepper = ({ activePage, labelStepper }) => {
+const Stepper = ({ activePage, totalPages, label }) => {
   const navigate = useNavigate();
 
   // Get degree from DegreeContext
   const { degree } = useContext(DegreeContext);
 
+  const createSteppers = () => {
+    const steppers = [];
+
+    for (let page = 1; page <= totalPages; page++) {
+      const isActive = activePage === page;
+      const isDone = activePage > page;
+
+      steppers.push(
+        <div
+          key={page}
+          className={`circle ${isActive ? 'active' : isDone ? 'done' : ''}`}
+        >
+          {isDone ? (
+            <Icon icon={checkboxMarkedCircleOutline} color='white' />
+          ) : (
+            <span className={`number ${isActive ? 'active' : ''}`}>{page}</span>
+          )}
+        </div>
+      );
+
+      if (page !== totalPages) {
+        steppers.push(
+          <div
+            key={`line-${page}`}
+            className={`line ${activePage >= page + 1 ? 'active' : ''}`}
+          />
+        );
+      }
+    }
+
+    return steppers;
+  };
+
   return (
     <div className='stepper__wrapper'>
-      <div className='stepper__wrapper--numbers'>
-        <div className={`circle ${activePage === 1 ? 'active' : 'done'}`}>
-          {activePage === 1 ? (
-            <span className={`number ${activePage >= 1 ? 'active' : ''}`}>
-              1
-            </span>
-          ) : (
-            <Icon icon='mdi:tick' color='white' />
-          )}
-        </div>
-        <div className={`line ${activePage >= 2 ? 'active' : ''}`} />
-        <div
-          className={`circle ${activePage === 2 ? 'active' : ''} ${
-            activePage >= 3 ? 'done' : ''
-          }`}
-        >
-          {activePage <= 2 ? (
-            <span className={`number ${activePage >= 2 ? 'active' : ''}`}>
-              2
-            </span>
-          ) : (
-            <Icon icon='mdi:tick' color='white' />
-          )}
-        </div>
-        <div className={`line ${activePage >= 3 ? 'active' : ''}`} />
-        <div className={`circle ${activePage >= 3 ? 'active' : ''}`}>
-          <span className={`number ${activePage === 3 ? 'active' : ''}`}>
-            3
-          </span>
-        </div>
-        <div className={`line ${activePage >= 4 ? 'active' : ''}`} />
-        <div className={`circle ${activePage >= 4 ? 'active' : ''}`}>
-          <span className={`number ${activePage === 4 ? 'active' : ''}`}>
-            4
-          </span>
-        </div>
-      </div>
+      <div className='stepper__wrapper--numbers'>{createSteppers()}</div>
       <div>
         <div className='stepper__wrapper--text'>
-          <span
-            className={`page-text ${activePage >= 1 ? 'active' : ''}`}
-            onClick={() => navigate(`/degrees/${degree._id}`)}
-          >
-            {labelStepper[0]}
-          </span>
-          <span
-            className={`page-text ${activePage >= 2 ? 'active' : ''}`}
-            onClick={() => navigate(`/degrees/${degree._id}/units`)}
-          >
-            {labelStepper[1]}
-          </span>
-          <span
-            className={`page-text ${activePage === 3 ? 'active' : ''}`}
-            onClick={() =>
-              navigate(`/degrees/${degree._id}/units/confirm-selection`)
-            }
-          >
-            {labelStepper[2]}
-          </span>
-          <span
-            className={`page-text ${activePage === 4 ? 'active' : ''}`}
-            onClick={() =>
-              navigate(`/degrees/${degree._id}/units/confirm-selection`)
-            }
-          >
-            {labelStepper[3]}
-          </span>
+          {label.map((text, index) => (
+            <span
+              key={index}
+              className={`page-text ${activePage >= index + 1 ? 'active' : ''}`}
+              onClick={() =>
+                navigate(`/degrees/${degree._id}/units/confirm-selection`)
+              }
+            >
+              {text}
+            </span>
+          ))}
         </div>
       </div>
     </div>
@@ -87,7 +68,8 @@ const Stepper = ({ activePage, labelStepper }) => {
 
 Stepper.propTypes = {
   activePage: PropTypes.number.isRequired,
-  labelStepper: PropTypes.arrayOf(PropTypes.string).isRequired,
+  totalPages: PropTypes.number.isRequired,
+  label: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Stepper;
