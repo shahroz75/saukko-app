@@ -129,7 +129,7 @@ const SearchPage = () => {
     switch (role) {
       case 'customer':
         return 'Ammatilliset koulutukset';
-      //Teacher is temporary used for admin until admin role is available from the DB
+      // Teacher is temporary used for admin until admin role is available from the DB
       case 'teacher':
         return 'Tutkintojen hallinta';
       default:

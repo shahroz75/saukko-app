@@ -12,21 +12,30 @@ import PageNavigationButtons from '../../../components/PageNavigationButtons/Pag
 
 function DegreeInfo() {
   const navigate = useNavigate();
-  
+
   // Set path & get degree from DegreeContext
   const { setDegreeId, degree, degreeFound } = useContext(DegreeContext);
   const params = useParams();
-  
+  // Define different text for stepper's labels
+  const textStepper = {
+    admin: [
+      'Tutkintotiedot',
+      'Valitse tutkinnonosat',
+      'Muokkaa tietoja',
+      'Vahvista',
+    ],
+  };
+
   useEffect(() => {
     setDegreeId(params.degreeId);
   }, []);
 
-  console.log('degree from context:', degree)
+  console.log('degree from context:', degree);
 
   // Parse date
   function parseDate(milliseconds) {
     if (milliseconds === null) {
-      return null
+      return null;
     } else {
       const dateObj = new Date(milliseconds);
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -35,16 +44,31 @@ function DegreeInfo() {
       return finnishDate.replace(/(\d+)\s+(\w+)\s+(\d+)/, '$1. $2 $3.');
     }
   }
-  
+
   return (
     <main className='degreeInfo__wrapper'>
-      <WavesHeader title='Saukko' secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'} />
+      <WavesHeader
+        title='Saukko'
+        secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
+      />
       <section className='degreeInfo__container'>
-        <PageNumbers activePage={1} totalPages={3}/>
+        <PageNumbers
+          activePage={1}
+          totalPages={3}
+          labelStepper={textStepper.admin}
+        />
+
         <div className='degreeInfo__container--info'>
           <div className='degreeInfo__container--info--block'>
             <h1>Tutkinnon suorittaneen osaaminen</h1>
-            <p>Lorem ipsum dolor sit amet, pri eu aperiri ancillae, eu omnes integre eam, vis et esse primis legendos. His commodo maiestatis te, graeco persius iudicabit sed ea. Nec te nihil discere interesset. Veniam signiferumque eam cu. Legere debitis delectus ei his, laoreet debitis apeirian quo te. No putant fastidii invenire vis, mei te facete molestie vituperatoribus, vitae euismod an mei.
+            <p>
+              Lorem ipsum dolor sit amet, pri eu aperiri ancillae, eu omnes
+              integre eam, vis et esse primis legendos. His commodo maiestatis
+              te, graeco persius iudicabit sed ea. Nec te nihil discere
+              interesset. Veniam signiferumque eam cu. Legere debitis delectus
+              ei his, laoreet debitis apeirian quo te. No putant fastidii
+              invenire vis, mei te facete molestie vituperatoribus, vitae
+              euismod an mei.
             </p>
           </div>
           <div className='degreeInfo__container--info--block dark'>
@@ -57,11 +81,17 @@ function DegreeInfo() {
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Määräyksen päätöspäivämäärä</h2>
-            <p>{degreeFound ? parseDate(degree.regulationDate) : 'ei dataa APIsta'}</p>
+            <p>
+              {degreeFound
+                ? parseDate(degree.regulationDate)
+                : 'ei dataa APIsta'}
+            </p>
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Voimaantulo</h2>
-            <p>{degreeFound ? parseDate(degree.validFrom) : 'ei dataa APIsta'}</p>
+            <p>
+              {degreeFound ? parseDate(degree.validFrom) : 'ei dataa APIsta'}
+            </p>
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Voimassaolon päättyminen</h2>
@@ -69,20 +99,28 @@ function DegreeInfo() {
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Siirtymäajan päättymisaika</h2>
-            <p>{degreeFound ? parseDate(degree.transitionEnds) : 'ei dataa APIsta'}</p>
+            <p>
+              {degreeFound
+                ? parseDate(degree.transitionEnds)
+                : 'ei dataa APIsta'}
+            </p>
           </div>
         </div>
-        
-        <Hyperlink 
-          linkText={'Lue lisää tästä linkistä'} 
+
+        <Hyperlink
+          linkText={'Lue lisää tästä linkistä'}
           linkSource={degree.examInfoURL}
         />
-          
-        <PageNavigationButtons handleBack={() => navigate('/degrees')} handleForward={() => navigate(`/degrees/${degree._id}/units`)} forwardButtonText={'Valitse tutkinto'}/>
+
+        <PageNavigationButtons
+          handleBack={() => navigate('/degrees')}
+          handleForward={() => navigate(`/degrees/${degree._id}/units`)}
+          forwardButtonText={'Valitse tutkinto'}
+        />
       </section>
       <UserNav />
     </main>
-  )
+  );
 }
 
-export default DegreeInfo
+export default DegreeInfo;

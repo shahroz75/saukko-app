@@ -35,6 +35,7 @@ import UserDashboard from '../../pages/UserDashboard/UserDashboard';
 import ContractInfo from '../../pages/ContractInfo/ContractInfo';
 import UpdateHomePageAfterLoggedIn from '../../pages/UpdateHomePageAfterLogin/UpdateHomepageAfterLogin';
 import UpdateHomePageAfterLogin from '../../pages/UpdateHomePageAfterLogin/UpdateHomepageAfterLogin';
+import EditDegree from '../../pages/AdminDegree/EditDegree';
 
 const Router = () => {
   let location = useLocation();
@@ -74,14 +75,16 @@ const Router = () => {
         />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/contract-info' element={<ContractInfo />} />
-        {/* <Route path='/degrees' element={<SearchPage />} />
+        <Route path='/degrees' element={<SearchPage />} />
         <Route path='/degrees/:degreeId' element={<DegreeInfo />} />
         <Route path='/degrees/:degreeId/units' element={<DegreeUnits />} />
         <Route path='/degrees/:degreeId/units/:unitId' element={<UnitInfo />} />
         <Route
           path='/degrees/:degreeId/units/confirm-selection'
-          element={<ConfirmSelection />} */}
+          element={<ConfirmSelection />}
         />
+        <Route path='/edit-degrees/:degreeId' element={<EditDegree />} />
+
         {!loggedIn && (
           <>
             <Route exact='true' path='/' element={<LandingPage />} />
