@@ -11,8 +11,8 @@ const Stepper = ({ activePage, labelStepper }) => {
   const { degree } = useContext(DegreeContext);
 
   return (
-    <div className='page-numbers__wrapper'>
-      <div className='page-numbers__wrapper--numbers'>
+    <div className='stepper__wrapper'>
+      <div className='stepper__wrapper--numbers'>
         <div className={`circle ${activePage === 1 ? 'active' : 'done'}`}>
           {activePage === 1 ? (
             <span className={`number ${activePage >= 1 ? 'active' : ''}`}>
@@ -50,7 +50,7 @@ const Stepper = ({ activePage, labelStepper }) => {
         </div>
       </div>
       <div>
-        <div className='page-numbers__wrapper--text'>
+        <div className='stepper__wrapper--text'>
           <span
             className={`page-text ${activePage >= 1 ? 'active' : ''}`}
             onClick={() => navigate(`/degrees/${degree._id}`)}
