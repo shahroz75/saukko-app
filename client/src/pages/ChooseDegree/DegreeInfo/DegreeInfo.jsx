@@ -11,9 +11,11 @@ import UserNav from '../../../components/UserNav/UserNav';
 import Stepper from '../../../components/Stepper/Stepper';
 import Hyperlink from '../../../components/Hyperlink/Hyperlink';
 import PageNavigationButtons from '../../../components/PageNavigationButtons/PageNavigationButtons';
+import ContentEditable from 'react-contenteditable';
 
 function DegreeInfo() {
   const { degreeName, setDegreeName } = useStore();
+  const textRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -40,6 +42,14 @@ function DegreeInfo() {
     setDegreeId(params.degreeId);
   }, []);
 
+  const handleContentChange = (event) => {
+    setDegreeName(event.target.value);
+  };
+
+  const handlePencilClick = () => {
+    textRef.current.focus();
+  };
+
   // Parse date
   function parseDate(milliseconds) {
     if (milliseconds === null) {
@@ -52,16 +62,6 @@ function DegreeInfo() {
       return finnishDate.replace(/(\d+)\s+(\w+)\s+(\d+)/, '$1. $2 $3.');
     }
   }
-
-  const textRef = useRef(null);
-
-  const handleContentChange = (event) => {
-    setDegreeName(event.target.innerText);
-  };
-
-  const handlePencilClick = () => {
-    textRef.current.focus();
-  };
 
   console.log('degreeName: ', degreeName);
 
@@ -90,14 +90,13 @@ function DegreeInfo() {
           <div className='degreeInfo__container--info--block dark'>
             <h2>Perusteen nimi</h2>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <p
-                contentEditable={true}
-                onInput={handleContentChange}
-                ref={textRef}
-                // style={{ border: '1px solid black', padding: '5px' }}
-              >
-                {degreeName}
-              </p>
+              <ContentEditable
+                html={degreeName}
+                onChange={handleContentChange}
+                innerRef={textRef}
+                tagName='p'
+              />
+
               <Icon
                 style={{ marginLeft: '5px', cursor: 'pointer' }}
                 onClick={handlePencilClick}

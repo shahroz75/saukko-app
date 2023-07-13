@@ -20,6 +20,7 @@
         ]
     },
     "dependencies": {
-        "@iconify/icons-mdi": "^1.2.47"
+        "@iconify/icons-mdi": "^1.2.47",
+        "react-contenteditable": "^3.3.7"
     }
 }
