@@ -64,7 +64,7 @@ const Router = () => {
     <>
       <Routes key={location.pathname} location={location}>
         {/* placeholder paths and pages */}
-        <Route path='/test-page' element={<TestPage />} />
+        {/* <Route path='/test-page' element={<TestPage />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/first-login' element={<FirstLogin />} />
         <Route path='/reset-password/:token' element={<ResetPassword />} />
@@ -74,8 +74,8 @@ const Router = () => {
           element={<UpdateHomePageAfterLogin />}
         />
         <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/contract-info' element={<ContractInfo />} />
-        <Route path='/degrees' element={<SearchPage />} />
+        <Route path='/contract-info' element={<ContractInfo />} /> */}
+        {/* <Route path='/degrees' element={<SearchPage />} />
         <Route path='/degrees/:degreeId' element={<DegreeInfo />} />
         <Route path='/degrees/:degreeId/units' element={<DegreeUnits />} />
         <Route path='/degrees/:degreeId/units/:unitId' element={<UnitInfo />} />
@@ -83,7 +83,7 @@ const Router = () => {
           path='/degrees/:degreeId/units/confirm-selection'
           element={<ConfirmSelection />}
         />
-        <Route path='/edit-degrees/:degreeId' element={<EditDegree />} />
+        <Route path='/edit-degrees/:degreeId' element={<EditDegree />} /> */}
 
         {!loggedIn && (
           <>

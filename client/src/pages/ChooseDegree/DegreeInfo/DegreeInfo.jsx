@@ -1,6 +1,8 @@
 // Import react packages
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import useStore from '../../../useStore';
+import { Icon } from '@iconify/react';
 
 // Import components
 import DegreeContext from '../../../utils/context/DegreeContext';
@@ -11,6 +13,8 @@ import Hyperlink from '../../../components/Hyperlink/Hyperlink';
 import PageNavigationButtons from '../../../components/PageNavigationButtons/PageNavigationButtons';
 
 function DegreeInfo() {
+  const { degreeName, setDegreeName } = useStore();
+
   const navigate = useNavigate();
 
   // Set path & get degree from DegreeContext
@@ -27,10 +31,14 @@ function DegreeInfo() {
   };
 
   useEffect(() => {
+    if (degreeFound) {
+      setDegreeName(degree.name.fi);
+    }
+  }, [degreeFound]);
+
+  useEffect(() => {
     setDegreeId(params.degreeId);
   }, []);
-
-  console.log('degree from context:', degree);
 
   // Parse date
   function parseDate(milliseconds) {
@@ -44,6 +52,18 @@ function DegreeInfo() {
       return finnishDate.replace(/(\d+)\s+(\w+)\s+(\d+)/, '$1. $2 $3.');
     }
   }
+
+  const textRef = useRef(null);
+
+  const handleContentChange = (event) => {
+    setDegreeName(event.target.innerText);
+  };
+
+  const handlePencilClick = () => {
+    textRef.current.focus();
+  };
+
+  console.log('degreeName: ', degreeName);
 
   return (
     <main className='degreeInfo__wrapper'>
@@ -69,7 +89,22 @@ function DegreeInfo() {
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Perusteen nimi</h2>
-            <p>{degreeFound ? degree.name.fi : 'ei dataa APIsta'}</p>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <p
+                contentEditable={true}
+                onInput={handleContentChange}
+                ref={textRef}
+                // style={{ border: '1px solid black', padding: '5px' }}
+              >
+                {degreeName}
+              </p>
+              <Icon
+                style={{ marginLeft: '5px', cursor: 'pointer' }}
+                onClick={handlePencilClick}
+                icon='mingcute:pencil-line'
+                className='pencil'
+              />
+            </div>
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Määräyksen diaarinumero</h2>
