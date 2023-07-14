@@ -89,7 +89,12 @@ function DegreeInfo() {
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Perusteen nimi</h2>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
               <ContentEditable
                 html={degreeName}
                 onChange={handleContentChange}
@@ -98,7 +103,6 @@ function DegreeInfo() {
               />
 
               <Icon
-                style={{ marginLeft: '5px', cursor: 'pointer' }}
                 onClick={handlePencilClick}
                 icon='mingcute:pencil-line'
                 className='pencil'
