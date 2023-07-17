@@ -59,7 +59,7 @@ function DegreeInfo() {
       degree.name !== null && setDegreeName(degree.name.fi);
       degree.description !== null &&
         setDegreeDescription(degree.description.fi);
-      degree.diaryNumber !== null && setDiaryNumber(degree.diaryNumber.fi);
+      degree.diaryNumber !== null && setDiaryNumber(degree.diaryNumber);
       degree.regulationDate !== null &&
         setRegulationDate(parseDate(degree.regulationDate.fi));
       degree.validFrom !== null && setValidFrom(parseDate(degree.validFrom.fi));
@@ -79,12 +79,42 @@ function DegreeInfo() {
   const handleDescriptionChange = (event) => {
     setDegreeDescription(event.target.value);
   };
+  const handleDiaryNumberChange = (event) => {
+    setDiaryNumber(event.target.value);
+  };
+  const handleRegulationDateChange = (event) => {
+    setRegulationDate(event.target.value);
+  };
+  const handleValidFromChange = (event) => {
+    setValidFrom(event.target.value);
+  };
+  const handleExpiryChange = (event) => {
+    setExpiry(event.target.value);
+  };
+  const handleTransitionEndsChange = (event) => {
+    setTransitionEnds(event.target.value);
+  };
 
   const handleNameClick = () => {
     degreeNameRef.current.focus();
   };
   const handleDescriptionClick = () => {
     degreeDescriptionRef.current.focus();
+  };
+  const handleDiaryNumberClick = () => {
+    diaryNumberRef.current.focus();
+  };
+  const handleRegulationDateClick = () => {
+    regulationDateRef.current.focus();
+  };
+  const handleValidFromClick = () => {
+    validFromRef.current.focus();
+  };
+  const handleExpiryClick = () => {
+    expiryRef.current.focus();
+  };
+  const transitionEndsClick = () => {
+    transitionEndsRef.current.focus();
   };
 
   // Parse date
@@ -159,6 +189,25 @@ function DegreeInfo() {
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Määräyksen diaarinumero</h2>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <ContentEditable
+                html={diaryNumber}
+                onChange={handleDiaryNumberChange}
+                innerRef={diaryNumberRef}
+                tagName='p'
+              />
+
+              <Icon
+                onClick={handleDiaryNumberClick}
+                icon='mingcute:pencil-line'
+                className='pencil'
+              />
+            </div>
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Määräyksen päätöspäivämäärä</h2>
