@@ -62,10 +62,10 @@ function DegreeInfo() {
       degree.diaryNumber !== null && setDiaryNumber(degree.diaryNumber);
       degree.regulationDate !== null &&
         setRegulationDate(parseDate(degree.regulationDate));
-      degree.validFrom !== null && setValidFrom(parseDate(degree.validFrom.fi));
-      degree.expiry !== null && setExpiry(parseDate(degree.expiry.fi));
+      degree.validFrom !== null && setValidFrom(parseDate(degree.validFrom));
+      degree.expiry !== null && setExpiry(parseDate(degree.expiry));
       degree.transitionEnds !== null &&
-        setTransitionEnds(parseDate(degree.transitionEnds.fi));
+        setTransitionEnds(parseDate(degree.transitionEnds));
     }
   }, [degreeFound]);
 
@@ -73,6 +73,7 @@ function DegreeInfo() {
     setDegreeId(params.degreeId);
   }, []);
 
+  // Handle Text Changes
   const handleNameChange = (event) => {
     setDegreeName(event.target.value);
   };
@@ -95,6 +96,7 @@ function DegreeInfo() {
     setTransitionEnds(event.target.value);
   };
 
+  // Handle click events to trigger text editing
   const handleNameClick = () => {
     degreeNameRef.current.focus();
   };
@@ -113,7 +115,7 @@ function DegreeInfo() {
   const handleExpiryClick = () => {
     expiryRef.current.focus();
   };
-  const transitionEndsClick = () => {
+  const handleTransitionEndsClick = () => {
     transitionEndsRef.current.focus();
   };
 
@@ -233,12 +235,69 @@ function DegreeInfo() {
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Voimaantulo</h2>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <ContentEditable
+                html={validFrom}
+                onChange={handleValidFromChange}
+                innerRef={validFromRef}
+                tagName='p'
+              />
+
+              <Icon
+                onClick={handleValidFromClick}
+                icon='mingcute:pencil-line'
+                className='pencil'
+              />
+            </div>
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Voimassaolon päättyminen</h2>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <ContentEditable
+                html={expiry}
+                onChange={handleExpiryChange}
+                innerRef={expiryRef}
+                tagName='p'
+              />
+
+              <Icon
+                onClick={handleExpiryClick}
+                icon='mingcute:pencil-line'
+                className='pencil'
+              />
+            </div>
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Siirtymäajan päättymisaika</h2>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <ContentEditable
+                html={transitionEnds}
+                onChange={handleTransitionEndsChange}
+                innerRef={transitionEndsRef}
+                tagName='p'
+              />
+
+              <Icon
+                onClick={handleTransitionEndsClick}
+                icon='mingcute:pencil-line'
+                className='pencil'
+              />
+            </div>
           </div>
         </div>
 
