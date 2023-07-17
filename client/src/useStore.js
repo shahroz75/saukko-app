@@ -57,6 +57,11 @@ const useStore = create((set) => ({
   // Admin
   setDegreeName: (degreeName) => set({ degreeName }),
   setDegreeDescription: (degreeDescription) => set({ degreeDescription }),
+  setDiaryNumber: (diaryNumber) => set({ diaryNumber }),
+  setRegulationDate: (regulationDate) => set({ regulationDate }),
+  setValidFrom: (validFrom) => set({ validFrom }),
+  setExpiry: (expiry) => set({ expiry }),
+  setTransitionEnds: (transitionEnds) => set({ transitionEnds }),
 
   // Define a resetForm function to reset all state variables to their initial values
   resetForm: () =>
