@@ -61,7 +61,7 @@ function DegreeInfo() {
         setDegreeDescription(degree.description.fi);
       degree.diaryNumber !== null && setDiaryNumber(degree.diaryNumber);
       degree.regulationDate !== null &&
-        setRegulationDate(parseDate(degree.regulationDate.fi));
+        setRegulationDate(parseDate(degree.regulationDate));
       degree.validFrom !== null && setValidFrom(parseDate(degree.validFrom.fi));
       degree.expiry !== null && setExpiry(parseDate(degree.expiry.fi));
       degree.transitionEnds !== null &&
@@ -211,6 +211,25 @@ function DegreeInfo() {
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Määräyksen päätöspäivämäärä</h2>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <ContentEditable
+                html={regulationDate}
+                onChange={handleRegulationDateChange}
+                innerRef={regulationDateRef}
+                tagName='p'
+              />
+
+              <Icon
+                onClick={handleRegulationDateClick}
+                icon='mingcute:pencil-line'
+                className='pencil'
+              />
+            </div>
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Voimaantulo</h2>
