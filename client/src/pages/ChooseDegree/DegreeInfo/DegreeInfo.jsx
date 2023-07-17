@@ -14,8 +14,10 @@ import PageNavigationButtons from '../../../components/PageNavigationButtons/Pag
 import ContentEditable from 'react-contenteditable';
 
 function DegreeInfo() {
-  const { degreeName, setDegreeName } = useStore();
-  const textRef = useRef(null);
+  const { degreeName, setDegreeName, degreeDescription, setDegreeDescription } =
+    useStore();
+  const degreeNameRef = useRef(null);
+  const degreeDescriptionRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -35,6 +37,7 @@ function DegreeInfo() {
   useEffect(() => {
     if (degreeFound) {
       setDegreeName(degree.name.fi);
+      setDegreeDescription(degree.description.fi);
     }
   }, [degreeFound]);
 
@@ -42,12 +45,18 @@ function DegreeInfo() {
     setDegreeId(params.degreeId);
   }, []);
 
-  const handleContentChange = (event) => {
+  const handleNameChange = (event) => {
     setDegreeName(event.target.value);
   };
+  const handleDescriptionChange = (event) => {
+    setDegreeDescription(event.target.value);
+  };
 
-  const handlePencilClick = () => {
-    textRef.current.focus();
+  const handleNameClick = () => {
+    degreeNameRef.current.focus();
+  };
+  const handleDescriptionClick = () => {
+    degreeDescriptionRef.current.focus();
   };
 
   // Parse date
@@ -77,15 +86,26 @@ function DegreeInfo() {
         <div className='degreeInfo__container--info'>
           <div className='degreeInfo__container--info--block'>
             <h1>Tutkinnon suorittaneen osaaminen</h1>
-            <p>
-              Lorem ipsum dolor sit amet, pri eu aperiri ancillae, eu omnes
-              integre eam, vis et esse primis legendos. His commodo maiestatis
-              te, graeco persius iudicabit sed ea. Nec te nihil discere
-              interesset. Veniam signiferumque eam cu. Legere debitis delectus
-              ei his, laoreet debitis apeirian quo te. No putant fastidii
-              invenire vis, mei te facete molestie vituperatoribus, vitae
-              euismod an mei.
-            </p>
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <ContentEditable
+                html={degreeDescription}
+                onChange={handleDescriptionChange}
+                innerRef={degreeDescriptionRef}
+                tagName='p'
+              />
+
+              <Icon
+                onClick={handleDescriptionClick}
+                icon='mingcute:pencil-line'
+                className='pencil'
+              />
+            </div>
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Perusteen nimi</h2>
@@ -97,13 +117,13 @@ function DegreeInfo() {
             >
               <ContentEditable
                 html={degreeName}
-                onChange={handleContentChange}
-                innerRef={textRef}
+                onChange={handleNameChange}
+                innerRef={degreeNameRef}
                 tagName='p'
               />
 
               <Icon
-                onClick={handlePencilClick}
+                onClick={handleNameClick}
                 icon='mingcute:pencil-line'
                 className='pencil'
               />
