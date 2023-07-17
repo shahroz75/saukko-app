@@ -54,7 +54,8 @@ const useStore = create((set) => ({
   setEducation: (education) => set({ education }),
   setOpenNotificationModal: (openNotificationModal) =>
     set({ openNotificationModal }),
-  // Admin
+
+  // Admin setter functions
   setDegreeName: (degreeName) => set({ degreeName }),
   setDegreeDescription: (degreeDescription) => set({ degreeDescription }),
   setDiaryNumber: (diaryNumber) => set({ diaryNumber }),

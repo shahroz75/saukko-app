@@ -14,10 +14,30 @@ import PageNavigationButtons from '../../../components/PageNavigationButtons/Pag
 import ContentEditable from 'react-contenteditable';
 
 function DegreeInfo() {
-  const { degreeName, setDegreeName, degreeDescription, setDegreeDescription } =
-    useStore();
+  const {
+    degreeName,
+    setDegreeName,
+    degreeDescription,
+    setDegreeDescription,
+    diaryNumber,
+    setDiaryNumber,
+    regulationDate,
+    setRegulationDate,
+    validFrom,
+    setValidFrom,
+    expiry,
+    setExpiry,
+    transitionEnds,
+    setTransitionEnds,
+  } = useStore();
+
   const degreeNameRef = useRef(null);
   const degreeDescriptionRef = useRef(null);
+  const diaryNumberRef = useRef(null);
+  const regulationDateRef = useRef(null);
+  const validFromRef = useRef(null);
+  const expiryRef = useRef(null);
+  const transitionEndsRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -36,8 +56,16 @@ function DegreeInfo() {
 
   useEffect(() => {
     if (degreeFound) {
-      setDegreeName(degree.name.fi);
-      setDegreeDescription(degree.description.fi);
+      degree.name !== null && setDegreeName(degree.name.fi);
+      degree.description !== null &&
+        setDegreeDescription(degree.description.fi);
+      degree.diaryNumber !== null && setDiaryNumber(degree.diaryNumber.fi);
+      degree.regulationDate !== null &&
+        setRegulationDate(parseDate(degree.regulationDate.fi));
+      degree.validFrom !== null && setValidFrom(parseDate(degree.validFrom.fi));
+      degree.expiry !== null && setExpiry(parseDate(degree.expiry.fi));
+      degree.transitionEnds !== null &&
+        setTransitionEnds(parseDate(degree.transitionEnds.fi));
     }
   }, [degreeFound]);
 
@@ -131,33 +159,18 @@ function DegreeInfo() {
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Määräyksen diaarinumero</h2>
-            <p>{degreeFound ? degree.diaryNumber : 'ei dataa APIsta'}</p>
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Määräyksen päätöspäivämäärä</h2>
-            <p>
-              {degreeFound
-                ? parseDate(degree.regulationDate)
-                : 'ei dataa APIsta'}
-            </p>
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Voimaantulo</h2>
-            <p>
-              {degreeFound ? parseDate(degree.validFrom) : 'ei dataa APIsta'}
-            </p>
           </div>
           <div className='degreeInfo__container--info--block dark'>
             <h2>Voimassaolon päättyminen</h2>
-            <p>{degreeFound ? parseDate(degree.expiry) : 'ei dataa APIsta'}</p>
           </div>
           <div className='degreeInfo__container--info--block'>
             <h2>Siirtymäajan päättymisaika</h2>
-            <p>
-              {degreeFound
-                ? parseDate(degree.transitionEnds)
-                : 'ei dataa APIsta'}
-            </p>
           </div>
         </div>
 
