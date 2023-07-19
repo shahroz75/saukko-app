@@ -1,5 +1,4 @@
-// Import react packages
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useStore from '../../../useStore';
 import { Icon } from '@iconify/react';
@@ -11,6 +10,7 @@ import UserNav from '../../../components/UserNav/UserNav';
 import Stepper from '../../../components/Stepper/Stepper';
 import Hyperlink from '../../../components/Hyperlink/Hyperlink';
 import PageNavigationButtons from '../../../components/PageNavigationButtons/PageNavigationButtons';
+import Button from '../../../components/Button/Button';
 import ContentEditable from 'react-contenteditable';
 
 function DegreeInfo() {
@@ -31,6 +31,7 @@ function DegreeInfo() {
     setTransitionEnds,
   } = useStore();
 
+  const [isEditable, setIsEditable] = useState(false);
   const degreeNameRef = useRef(null);
   const degreeDescriptionRef = useRef(null);
   const diaryNumberRef = useRef(null);
@@ -96,27 +97,9 @@ function DegreeInfo() {
     setTransitionEnds(event.target.value);
   };
 
-  // Handle click events to trigger text editing
-  const handleNameClick = () => {
-    degreeNameRef.current.focus();
-  };
-  const handleDescriptionClick = () => {
-    degreeDescriptionRef.current.focus();
-  };
-  const handleDiaryNumberClick = () => {
-    diaryNumberRef.current.focus();
-  };
-  const handleRegulationDateClick = () => {
-    regulationDateRef.current.focus();
-  };
-  const handleValidFromClick = () => {
-    validFromRef.current.focus();
-  };
-  const handleExpiryClick = () => {
-    expiryRef.current.focus();
-  };
-  const handleTransitionEndsClick = () => {
-    transitionEndsRef.current.focus();
+  // Toggle text editable mode
+  const handleEditToggle = () => {
+    setIsEditable((prevState) => !prevState);
   };
 
   // Parse date
@@ -134,6 +117,24 @@ function DegreeInfo() {
 
   console.log('degreeName: ', degreeName);
 
+  // Button styling/CSS
+  const buttonStyleSave = {
+      background: '#0000bf',
+      color: '#fff',
+      border: 'red',
+      padding: '1rem',
+      marginTop: '20px',
+      width: '90%',
+    },
+    buttonStyleEdit = {
+      background: '#fff',
+      color: '#0000bf',
+      border: 'solid 2px #0000bf',
+      padding: '1rem',
+      marginTop: '20px',
+      width: '90%',
+    };
+
   return (
     <main className='degreeInfo__wrapper'>
       <WavesHeader
@@ -142,6 +143,20 @@ function DegreeInfo() {
       />
       <section className='degreeInfo__container'>
         <Stepper activePage={1} totalPages={4} label={labelStepper.admin} />
+
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Button
+            onClick={handleEditToggle}
+            type='submit'
+            style={isEditable ? buttonStyleSave : buttonStyleEdit}
+            text={isEditable ? 'Esikatsele' : 'Muokkaa'}
+          />
+        </div>
 
         <div className='degreeInfo__container--info'>
           <div className='degreeInfo__container--info--block'>
@@ -158,12 +173,7 @@ function DegreeInfo() {
                 onChange={handleDescriptionChange}
                 innerRef={degreeDescriptionRef}
                 tagName='p'
-              />
-
-              <Icon
-                onClick={handleDescriptionClick}
-                icon='mingcute:pencil-line'
-                className='pencil'
+                disabled={!isEditable}
               />
             </div>
           </div>
@@ -180,12 +190,7 @@ function DegreeInfo() {
                 onChange={handleNameChange}
                 innerRef={degreeNameRef}
                 tagName='p'
-              />
-
-              <Icon
-                onClick={handleNameClick}
-                icon='mingcute:pencil-line'
-                className='pencil'
+                disabled={!isEditable}
               />
             </div>
           </div>
@@ -202,12 +207,7 @@ function DegreeInfo() {
                 onChange={handleDiaryNumberChange}
                 innerRef={diaryNumberRef}
                 tagName='p'
-              />
-
-              <Icon
-                onClick={handleDiaryNumberClick}
-                icon='mingcute:pencil-line'
-                className='pencil'
+                disabled={!isEditable}
               />
             </div>
           </div>
@@ -224,12 +224,7 @@ function DegreeInfo() {
                 onChange={handleRegulationDateChange}
                 innerRef={regulationDateRef}
                 tagName='p'
-              />
-
-              <Icon
-                onClick={handleRegulationDateClick}
-                icon='mingcute:pencil-line'
-                className='pencil'
+                disabled={!isEditable}
               />
             </div>
           </div>
@@ -246,12 +241,7 @@ function DegreeInfo() {
                 onChange={handleValidFromChange}
                 innerRef={validFromRef}
                 tagName='p'
-              />
-
-              <Icon
-                onClick={handleValidFromClick}
-                icon='mingcute:pencil-line'
-                className='pencil'
+                disabled={!isEditable}
               />
             </div>
           </div>
@@ -268,12 +258,7 @@ function DegreeInfo() {
                 onChange={handleExpiryChange}
                 innerRef={expiryRef}
                 tagName='p'
-              />
-
-              <Icon
-                onClick={handleExpiryClick}
-                icon='mingcute:pencil-line'
-                className='pencil'
+                disabled={!isEditable}
               />
             </div>
           </div>
@@ -290,12 +275,7 @@ function DegreeInfo() {
                 onChange={handleTransitionEndsChange}
                 innerRef={transitionEndsRef}
                 tagName='p'
-              />
-
-              <Icon
-                onClick={handleTransitionEndsClick}
-                icon='mingcute:pencil-line'
-                className='pencil'
+                disabled={!isEditable}
               />
             </div>
           </div>
@@ -309,7 +289,7 @@ function DegreeInfo() {
         <PageNavigationButtons
           handleBack={() => navigate('/degrees')}
           handleForward={() => navigate(`/degrees/${degree._id}/units`)}
-          forwardButtonText={'Valitse tutkinto'}
+          forwardButtonText={'Seuraava'}
         />
       </section>
       <UserNav />

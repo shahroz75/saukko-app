@@ -64,6 +64,19 @@ const useStore = create((set) => ({
   setExpiry: (expiry) => set({ expiry }),
   setTransitionEnds: (transitionEnds) => set({ transitionEnds }),
 
+  // Reset all state variables for degree's data
+
+  resetDegreeData: () =>
+    set({
+      degreeName: 'ei dataa APIsta',
+      degreeDescription: 'ei dataa APIsta',
+      diaryNumber: 'ei dataa APIsta',
+      regulationDate: 'ei dataa APIsta',
+      validFrom: 'ei dataa APIsta',
+      expiry: 'ei dataa APIsta',
+      transitionEnds: 'ei dataa APIsta',
+    }),
+
   // Define a resetForm function to reset all state variables to their initial values
   resetForm: () =>
     set({
