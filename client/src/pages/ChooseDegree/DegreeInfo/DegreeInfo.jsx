@@ -130,7 +130,7 @@ function DegreeInfo() {
       background: '#fff',
       color: '#0000bf',
       border: 'solid 2px #0000bf',
-      padding: '1rem',
+      padding: '0 1rem',
       marginTop: '20px',
       width: '90%',
     };
@@ -175,6 +175,7 @@ function DegreeInfo() {
                 innerRef={degreeDescriptionRef}
                 tagName='p'
                 disabled={!isEditable}
+                className={isEditable && 'border-input'}
               />
             </div>
           </div>
@@ -192,6 +193,7 @@ function DegreeInfo() {
                 innerRef={degreeNameRef}
                 tagName='p'
                 disabled={!isEditable}
+                className={isEditable && 'border-input'}
               />
             </div>
           </div>
@@ -209,6 +211,7 @@ function DegreeInfo() {
                 innerRef={diaryNumberRef}
                 tagName='p'
                 disabled={!isEditable}
+                className={isEditable && 'border-input'}
               />
             </div>
           </div>
@@ -226,6 +229,7 @@ function DegreeInfo() {
                 innerRef={regulationDateRef}
                 tagName='p'
                 disabled={!isEditable}
+                className={isEditable && 'border-input'}
               />
             </div>
           </div>
@@ -243,6 +247,7 @@ function DegreeInfo() {
                 innerRef={validFromRef}
                 tagName='p'
                 disabled={!isEditable}
+                className={isEditable && 'border-input'}
               />
             </div>
           </div>
@@ -260,6 +265,7 @@ function DegreeInfo() {
                 innerRef={expiryRef}
                 tagName='p'
                 disabled={!isEditable}
+                className={isEditable && 'border-input'}
               />
             </div>
           </div>
@@ -277,6 +283,7 @@ function DegreeInfo() {
                 innerRef={transitionEndsRef}
                 tagName='p'
                 disabled={!isEditable}
+                className={isEditable && 'border-input'}
               />
             </div>
           </div>
