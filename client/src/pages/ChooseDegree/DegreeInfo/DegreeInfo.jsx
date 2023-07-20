@@ -50,7 +50,7 @@ function DegreeInfo() {
     admin: [
       'Tutkintotiedot',
       'Valitse tutkinnonosat',
-      'Muokkaa tietoja',
+      'Määritä tehtävät',
       'Vahvista',
     ],
   };
