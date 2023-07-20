@@ -154,7 +154,7 @@ function DegreeInfo() {
             onClick={handleEditToggle}
             type='submit'
             style={isEditable ? buttonStyleSave : buttonStyleEdit}
-            text={isEditable ? 'Esikatsele' : 'Muokkaa tietoja'}
+            text={isEditable ? 'Lopeta muokkaus' : 'Muokkaa tietoja'}
             icon={'mingcute:pencil-line'}
           />
         </div>
