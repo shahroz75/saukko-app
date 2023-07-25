@@ -168,13 +168,15 @@ function DegreeInfo() {
             justifyContent: 'center',
           }}
         >
-          <Button
-            onClick={handleEditToggle}
-            type='submit'
-            style={isEditable ? buttonStyleSave : buttonStyleEdit}
-            text={isEditable ? 'Lopeta muokkaus' : 'Muokkaa tietoja'}
-            icon={'mingcute:pencil-line'}
-          />
+          {user?.role === 'admin' && (
+            <Button
+              onClick={handleEditToggle}
+              type='submit'
+              style={isEditable ? buttonStyleSave : buttonStyleEdit}
+              text={isEditable ? 'Lopeta muokkaus' : 'Muokkaa tietoja'}
+              icon={'mingcute:pencil-line'}
+            />
+          )}
         </div>
 
         <div className='degreeInfo__container--info'>
