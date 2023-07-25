@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react';
 
 // Import components
 import DegreeContext from '../../../utils/context/DegreeContext';
+import AuthContext from '../../../utils/context/AuthContext';
 import WavesHeader from '../../../components/Header/WavesHeader';
 import UserNav from '../../../components/UserNav/UserNav';
 import Stepper from '../../../components/Stepper/Stepper';
@@ -14,6 +15,9 @@ import Button from '../../../components/Button/Button';
 import ContentEditable from 'react-contenteditable';
 
 function DegreeInfo() {
+  const auth = useContext(AuthContext);
+  const user = auth.user;
+
   const {
     degreeName,
     setDegreeName,
@@ -53,6 +57,7 @@ function DegreeInfo() {
       'Määritä tehtävät',
       'Vahvista',
     ],
+    customer: ['Valitse tutkinto', 'Valitse tutkinnonosat', 'Vahvista pyyntö'],
   };
 
   useEffect(() => {
@@ -142,13 +147,21 @@ function DegreeInfo() {
         secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
       />
       <section className='degreeInfo__container'>
-        <Stepper
-          activePage={1}
-          totalPages={4}
-          label={labelStepper.admin}
-          url={`/degrees/${degree._id}`}
-        />
-
+        {user?.role === 'admin' ? (
+          <Stepper
+            activePage={1}
+            totalPages={4}
+            label={labelStepper.admin}
+            url={`/degrees/${degree._id}`}
+          />
+        ) : (
+          <Stepper
+            activePage={1}
+            totalPages={3}
+            label={labelStepper.customer}
+            url={`/degrees/${degree._id}/units/confirm-selection`}
+          />
+        )}
         <div
           style={{
             display: 'flex',
