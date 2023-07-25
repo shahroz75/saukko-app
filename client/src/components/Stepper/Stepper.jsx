@@ -5,7 +5,7 @@ import checkboxMarkedCircleOutline from '@iconify/icons-mdi/checkbox-marked-circ
 import PropTypes from 'prop-types';
 import DegreeContext from '../../utils/context/DegreeContext';
 
-const Stepper = ({ activePage, totalPages, label }) => {
+const Stepper = ({ activePage, totalPages, label, url }) => {
   const navigate = useNavigate();
 
   // Get degree from DegreeContext
@@ -53,9 +53,7 @@ const Stepper = ({ activePage, totalPages, label }) => {
             <span
               key={index}
               className={`page-text ${activePage >= index + 1 ? 'active' : ''}`}
-              onClick={() =>
-                navigate(`/degrees/${degree._id}/units/confirm-selection`)
-              }
+              onClick={() => navigate(url)}
             >
               {text}
             </span>
@@ -70,6 +68,7 @@ Stepper.propTypes = {
   activePage: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   label: PropTypes.arrayOf(PropTypes.string).isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default Stepper;

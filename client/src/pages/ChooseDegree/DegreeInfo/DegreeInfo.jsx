@@ -142,7 +142,12 @@ function DegreeInfo() {
         secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
       />
       <section className='degreeInfo__container'>
-        <Stepper activePage={1} totalPages={4} label={labelStepper.admin} />
+        <Stepper
+          activePage={1}
+          totalPages={4}
+          label={labelStepper.admin}
+          url={`/degrees/${degree._id}`}
+        />
 
         <div
           style={{
