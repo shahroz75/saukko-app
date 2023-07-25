@@ -1,18 +1,15 @@
 // import necessary react components
-import { useNavigate } from "react-router-dom";
-import { Icon } from "@iconify/react";
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../utils/context/AuthContext";
-
+import { useNavigate } from 'react-router-dom';
+import { Icon } from '@iconify/react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import AuthContext from '../../utils/context/AuthContext';
 
 // icon component
 const UserNavIcon = (props) => {
   return (
     <button onClick={props.onClick}>
-
       <Icon icon={props.icon} rotate={props.rotate} />
-
     </button>
   );
 };
@@ -23,7 +20,7 @@ const UserNav = () => {
   const navigate = useNavigate();
   const role = user?.role;
 
-  const getHeaderColor = () => {
+  const getmenuColor = () => {
     // Define color based on role
     switch (role) {
       case 'customer':
@@ -32,89 +29,81 @@ const UserNav = () => {
         return '#FFC61E';
       case 'supervisor':
         return '#f5a3c7';
+      case 'admin':
+        return '#FFC61E';
       default:
         return '#9fc9eb';
     }
   };
 
-  const headerColor = getHeaderColor();
+  const menuColor = getmenuColor();
 
   const wrapperStyle = {
-    backgroundColor: headerColor,
+    backgroundColor: menuColor,
   };
 
   const LogOut = async () => {
-    await axios.get("http://localhost:5000/auth/logout");
-    localStorage.removeItem("token")
+    await axios.get('http://localhost:5000/auth/logout');
+    localStorage.removeItem('token');
     await getLoggedIn();
-    navigate("/");
+    navigate('/');
   };
 
   const renderIcons = () => {
-    if (user?.role === "teacher") {
+    if (user?.role === 'teacher' || user?.role === 'admin') {
       return (
         <>
           {/* home icon */}
           <UserNavIcon
-            icon="material-symbols:house-outline"
-            onClick={() => navigate("/userdashboard")}
+            icon='material-symbols:house-outline'
+            onClick={() => navigate('/userdashboard')}
           />
           {/* book icon */}
           <UserNavIcon
-            icon="healthicons:i-documents-accepted"
-          // onClick={() => navigate("/")}
+            icon='healthicons:i-documents-accepted'
+            // onClick={() => navigate("/")}
           />
           {/* persons icon */}
           <UserNavIcon
-            icon="fontisto:persons"
-          // onClick={() => navigate("/")}
+            icon='fontisto:persons'
+            // onClick={() => navigate("/")}
           />
           {/* user icon */}
           <UserNavIcon
-            icon="material-symbols:person-outline"
-            onClick={() => navigate("/profile")}
+            icon='material-symbols:person-outline'
+            onClick={() => navigate('/profile')}
           />
-
         </>
       );
-    } else if (user?.role === "customer" || user?.role === "supervisor") {
+    } else if (user?.role === 'customer' || user?.role === 'supervisor') {
       return (
         <>
           {/* home icon */}
           <UserNavIcon
-            icon="material-symbols:house-outline"
-            onClick={() => navigate("/userdashboard")}
+            icon='material-symbols:house-outline'
+            onClick={() => navigate('/userdashboard')}
           />
           {/* book icon */}
           <UserNavIcon
-            icon="material-symbols:menu-book-outline-sharp"
-          // onClick={() => navigate("/home")}
+            icon='material-symbols:menu-book-outline-sharp'
+            // onClick={() => navigate("/home")}
           />
 
           {/* user icon */}
           <UserNavIcon
-            icon="material-symbols:person-outline"
-            onClick={() => navigate("/profile")}
+            icon='material-symbols:person-outline'
+            onClick={() => navigate('/profile')}
           />
-
         </>
       );
     }
   };
 
   return (
-    <main className="userNav__wrapper" style={wrapperStyle}>
-      <section className="userNav__container">
-        {renderIcons()}
-      </section>
+    <main className='userNav__wrapper' style={wrapperStyle}>
+      <section className='userNav__container'>{renderIcons()}</section>
     </main>
-
   );
 };
 
 export default UserNav;
-
-
-
-
-
