@@ -51,7 +51,7 @@ function DegreeInfo() {
   const params = useParams();
   // Define different text for stepper's labels
   const labelStepper = {
-    admin: [
+    teacher: [
       'Tutkintotiedot',
       'Valitse tutkinnonosat',
       'Määritä tehtävät',
@@ -147,11 +147,11 @@ function DegreeInfo() {
         secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
       />
       <section className='degreeInfo__container'>
-        {user?.role === 'admin' ? (
+        {user?.role === 'teacher' ? (
           <Stepper
             activePage={1}
             totalPages={4}
-            label={labelStepper.admin}
+            label={labelStepper.teacher}
             url={`/degrees/${degree._id}`}
           />
         ) : (
@@ -168,7 +168,7 @@ function DegreeInfo() {
             justifyContent: 'center',
           }}
         >
-          {user?.role === 'admin' && (
+          {user?.role === 'teacher' && (
             <Button
               onClick={handleEditToggle}
               type='submit'
