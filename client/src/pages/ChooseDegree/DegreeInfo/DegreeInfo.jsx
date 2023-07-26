@@ -35,6 +35,12 @@ function DegreeInfo() {
     setTransitionEnds,
   } = useStore();
 
+  const [originalDegreeName, setOriginalDegreeName] = useState(degreeName);
+  const [originalDegreeDescription, setOriginalDegreeDescription] =
+    useState(degreeDescription);
+
+  const [isContentChanged, setIsContentChanged] = useState(false);
+
   const [isEditable, setIsEditable] = useState(false);
   const degreeNameRef = useRef(null);
   const degreeDescriptionRef = useRef(null);
@@ -72,6 +78,11 @@ function DegreeInfo() {
       degree.expiry !== null && setExpiry(parseDate(degree.expiry));
       degree.transitionEnds !== null &&
         setTransitionEnds(parseDate(degree.transitionEnds));
+
+      // Original degree content before any modifications
+      degree.name !== null && setOriginalDegreeName(degree.name.fi);
+      degree.description !== null &&
+        setOriginalDegreeDescription(degree.description.fi);
     }
   }, [degreeFound]);
 
@@ -81,10 +92,22 @@ function DegreeInfo() {
 
   // Handle Text Changes
   const handleNameChange = (event) => {
-    setDegreeName(event.target.value);
+    const updatedValue = event.target.value;
+    setDegreeName(updatedValue);
+    if (updatedValue !== originalDegreeName) {
+      setIsContentChanged(true);
+    } else {
+      setIsContentChanged(false);
+    }
   };
   const handleDescriptionChange = (event) => {
-    setDegreeDescription(event.target.value);
+    const updatedValue = event.target.value;
+    setDegreeDescription(updatedValue);
+    if (updatedValue !== originalDegreeDescription) {
+      setIsContentChanged(true);
+    } else {
+      setIsContentChanged(false);
+    }
   };
   const handleDiaryNumberChange = (event) => {
     setDiaryNumber(event.target.value);
@@ -317,7 +340,9 @@ function DegreeInfo() {
         <PageNavigationButtons
           handleBack={() => navigate('/degrees')}
           handleForward={() => navigate(`/degrees/${degree._id}/units`)}
-          forwardButtonText={'Seuraava'}
+          forwardButtonText={
+            isContentChanged ? 'Tallenna ja jatka' : 'Seuraava'
+          }
         />
       </section>
       <UserNav />
