@@ -70,7 +70,6 @@ function DegreeInfo() {
       'Määritä tehtävät',
       'Vahvista',
     ],
-    customer: ['Valitse tutkinto', 'Valitse tutkinnonosat', 'Vahvista pyyntö'],
   };
 
   useEffect(() => {
@@ -223,21 +222,13 @@ function DegreeInfo() {
         secondTitle={degreeFound ? degree.name.fi : 'ei dataa APIsta'}
       />
       <section className='degreeInfo__container'>
-        {user?.role === 'teacher' ? (
-          <Stepper
-            activePage={1}
-            totalPages={4}
-            label={labelStepper.teacher}
-            url={`/degrees/${degree._id}`}
-          />
-        ) : (
-          <Stepper
-            activePage={1}
-            totalPages={3}
-            label={labelStepper.customer}
-            url={`/degrees/${degree._id}/units/confirm-selection`}
-          />
-        )}
+        <Stepper
+          activePage={1}
+          totalPages={4}
+          label={labelStepper.teacher}
+          url={`/degrees/${degree._id}`}
+        />
+
         <div
           style={{
             display: 'flex',
