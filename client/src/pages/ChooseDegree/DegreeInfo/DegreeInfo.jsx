@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useStore from '../../../useStore';
-import { Icon } from '@iconify/react';
 
 // Import components
 import DegreeContext from '../../../utils/context/DegreeContext';
@@ -35,9 +34,17 @@ function DegreeInfo() {
     setTransitionEnds,
   } = useStore();
 
+  // State variables to keep track of original text
   const [originalDegreeName, setOriginalDegreeName] = useState(degreeName);
   const [originalDegreeDescription, setOriginalDegreeDescription] =
     useState(degreeDescription);
+  const [originalDiaryNumber, setOriginalDiaryNumber] = useState(diaryNumber);
+  const [originalRegulationDate, setOriginalRegulationDate] =
+    useState(regulationDate);
+  const [originalValidFrom, setOriginalValidFrom] = useState(validFrom);
+  const [originalExpiry, setOriginalExpiry] = useState(expiry);
+  const [originalTransitionEnds, setOriginalTransitionEnds] =
+    useState(transitionEnds);
 
   const [isContentChanged, setIsContentChanged] = useState(false);
 
@@ -83,6 +90,15 @@ function DegreeInfo() {
       degree.name !== null && setOriginalDegreeName(degree.name.fi);
       degree.description !== null &&
         setOriginalDegreeDescription(degree.description.fi);
+      degree.diaryNumber !== null && setOriginalDiaryNumber(degree.diaryNumber);
+      degree.regulationDate !== null &&
+        setOriginalRegulationDate(parseDate(degree.regulationDate));
+
+      degree.validFrom !== null &&
+        setOriginalValidFrom(parseDate(degree.validFrom));
+      degree.expiry !== null && setOriginalExpiry(parseDate(degree.expiry));
+      degree.transitionEnds !== null &&
+        setOriginalTransitionEnds(parseDate(degree.transitionEnds));
     }
   }, [degreeFound]);
 
@@ -90,7 +106,8 @@ function DegreeInfo() {
     setDegreeId(params.degreeId);
   }, []);
 
-  // Handle Text Changes
+  // Handle text changes and check if original text is modified
+  // Degree name
   const handleNameChange = (event) => {
     const updatedValue = event.target.value;
     setDegreeName(updatedValue);
@@ -100,6 +117,7 @@ function DegreeInfo() {
       setIsContentChanged(false);
     }
   };
+  // Degree description
   const handleDescriptionChange = (event) => {
     const updatedValue = event.target.value;
     setDegreeDescription(updatedValue);
@@ -109,20 +127,55 @@ function DegreeInfo() {
       setIsContentChanged(false);
     }
   };
+  // Degree diary number
   const handleDiaryNumberChange = (event) => {
-    setDiaryNumber(event.target.value);
+    const updatedValue = event.target.value;
+    setDiaryNumber(updatedValue);
+    if (updatedValue !== originalDiaryNumber) {
+      setIsContentChanged(true);
+    } else {
+      setIsContentChanged(false);
+    }
   };
+  // Degree Regulation date
   const handleRegulationDateChange = (event) => {
-    setRegulationDate(event.target.value);
+    const updatedValue = event.target.value;
+    setRegulationDate(updatedValue);
+    if (updatedValue !== originalRegulationDate) {
+      setIsContentChanged(true);
+    } else {
+      setIsContentChanged(false);
+    }
   };
+  // Degree valid from
   const handleValidFromChange = (event) => {
-    setValidFrom(event.target.value);
+    const updatedValue = event.target.value;
+    setValidFrom(updatedValue);
+    if (updatedValue !== originalValidFrom) {
+      setIsContentChanged(true);
+    } else {
+      setIsContentChanged(false);
+    }
   };
+  // Degree expiry date
   const handleExpiryChange = (event) => {
-    setExpiry(event.target.value);
+    const updatedValue = event.target.value;
+    setExpiry(updatedValue);
+    if (updatedValue !== originalExpiry) {
+      setIsContentChanged(true);
+    } else {
+      setIsContentChanged(false);
+    }
   };
+  // Degree Transition ending
   const handleTransitionEndsChange = (event) => {
-    setTransitionEnds(event.target.value);
+    const updatedValue = event.target.value;
+    setTransitionEnds(updatedValue);
+    if (updatedValue !== originalTransitionEnds) {
+      setIsContentChanged(true);
+    } else {
+      setIsContentChanged(false);
+    }
   };
 
   // Toggle text editable mode
