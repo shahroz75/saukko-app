@@ -62,15 +62,13 @@ function DegreeInfo() {
   // Set path & get degree from DegreeContext
   const { setDegreeId, degree, degreeFound } = useContext(DegreeContext);
   const params = useParams();
-  // Define different text for stepper's labels
-  const labelStepper = {
-    teacher: [
-      'Tutkintotiedot',
-      'Valitse tutkinnonosat',
-      'Määritä tehtävät',
-      'Vahvista',
-    ],
-  };
+  // Text for stepper's labels
+  const labelStepper = [
+    'Tutkintotiedot',
+    'Valitse tutkinnonosat',
+    'Määritä tehtävät',
+    'Vahvista',
+  ];
 
   useEffect(() => {
     if (degreeFound) {
@@ -225,7 +223,7 @@ function DegreeInfo() {
         <Stepper
           activePage={1}
           totalPages={4}
-          label={labelStepper.teacher}
+          label={labelStepper}
           url={`/degrees/${degree._id}`}
         />
 
