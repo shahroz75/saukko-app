@@ -73,6 +73,7 @@ const CompanyInfo = () => {
   const fetchCompanyName = async (businessID) => {
     try {
       const response = await fetchExternalCompanyData(businessID);
+      console.log(businessID)
       if (!response.ok) {
         setCompanyName('');
         throw new Error('Failed to fetch company name');
@@ -344,3 +345,8 @@ const CompanyInfo = () => {
 };
 
 export default CompanyInfo;
+
+
+
+
+
