@@ -89,17 +89,20 @@ function DegreeConfirmSelection() {
       const supervisorIds = await Promise.all(supervisorData);
       // console.log('Supervisor IDs:', supervisorIds);
 
-      //Setting the departments data
-
-
       let departmentData = null;
 
       if (departments) {
         departmentData = Object.keys(departments).map((key) => {
           const department = { name: departments[key] };
           const departmentSupervisor = supervisorIds;
-          // console.log('------department_supervisor_id------', supervisorIds);
-          department.supervisor = departmentSupervisor;
+          // Check if the department exists in Zustand
+          if (departments[key].length > 0) {
+            // If the department exists, save supervisors to department.supervisors
+            department.supervisors = departmentSupervisor;
+          } else {
+            // If the department does not exist, save supervisors to the main supervisors array
+            supervisors.push(...departmentSupervisor);
+          }
           return department;
         });
       }
@@ -112,7 +115,10 @@ function DegreeConfirmSelection() {
         degreeId: params.degreeId,
         units: checkedUnits.map((unit) => ({
           _id: unit._id,
-          name: unit.name.fi
+          name: {
+            fi: unit.name.fi,
+          },
+          assessments: [],
         }))
 
       };
@@ -165,12 +171,13 @@ function DegreeConfirmSelection() {
             <p className='second__paragraph'> {businessId}</p>
 
           </div>
-          {departments ? (
+          {departments.name && (
             <div className='confirmSelection__infolist-item'>
               <h2 className='second__title'>Yksikko</h2>
               <p className='second__paragraph'>{departments.name}</p>
             </div>
-          ) : null}
+          )}
+
           {supervisors.map((ohjaaja, index) => (
             <div key={index} className='confirmSelection__infolist-item'>
               <h2 className='second__title'>Työpaikkaohjaaja</h2>
@@ -218,6 +225,4 @@ function DegreeConfirmSelection() {
 }
 
 export default DegreeConfirmSelection;
-
-
 
