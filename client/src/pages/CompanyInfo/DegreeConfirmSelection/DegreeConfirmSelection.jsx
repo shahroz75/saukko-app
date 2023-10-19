@@ -167,6 +167,7 @@ function DegreeConfirmSelection() {
           </div>
           {departments ? (
             <div className='confirmSelection__infolist-item'>
+              <h2 className='second__title'>Yksikko</h2>
               <p className='second__paragraph'>{departments.name}</p>
             </div>
           ) : null}
