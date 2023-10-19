@@ -13,6 +13,7 @@ import { postWorkplace } from '../../../api/workplace';
 import axios from "axios";
 import { registration } from '../../../api/user';
 import { IconTwitter } from 'hds-react';
+import { arrayIncludes } from '@mui/x-date-pickers/internals/utils/utils';
 
 function DegreeConfirmSelection() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function DegreeConfirmSelection() {
 
   const checkedUnits = useUnitsStore((state) => state.checkedUnits);
 
-  console.log(checkedUnits)
+  console.log('checkedunits.........', checkedUnits)
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false)
@@ -121,7 +122,7 @@ function DegreeConfirmSelection() {
 
       const response = await postWorkplace(workplaceData);
 
-      // console.log('API Response------:', response);
+      console.log('API Response------:', response);
 
       setIsLoading(false);
 
@@ -160,10 +161,15 @@ function DegreeConfirmSelection() {
           <h2 className='Degree__confirmSelection__container--secondtitle'>Yhteenveto</h2>
           <div className='confirmSelection__infolist-item'>
             <h2 className='second__title'>Työpaikka</h2>
-            <p className='second__paragraph'> {businessId}</p>
             <p className='second__paragraph'>{name ? name.name : editedCompanyName}</p>
-            <p className='second__paragraph'>{departments ? departments.name : ''}</p>
+            <p className='second__paragraph'> {businessId}</p>
+
           </div>
+          {departments ? (
+            <div className='confirmSelection__infolist-item'>
+              <p className='second__paragraph'>{departments.name}</p>
+            </div>
+          ) : null}
           {supervisors.map((ohjaaja, index) => (
             <div key={index} className='confirmSelection__infolist-item'>
               <h2 className='second__title'>Työpaikkaohjaaja</h2>
@@ -211,5 +217,6 @@ function DegreeConfirmSelection() {
 }
 
 export default DegreeConfirmSelection;
+
 
 
