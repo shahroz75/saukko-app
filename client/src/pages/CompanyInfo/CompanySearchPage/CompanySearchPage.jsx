@@ -19,11 +19,11 @@ const CheckLength = ({ filteredList, allInternalDegrees, paginate, currentPage }
         <div key={index} className="company__searchPage__container--list-item" onClick={() => navigate(`../internal/degrees/${degree._id}/units`)}>
           <h3>{degree.name.fi}</h3>
           <div className="company__searchPage__container--list-item-bottom">
-            <div>
+            {/* <div>
               <p>Diaari: {degree.diaryNumber}</p>
               <p>Koodi: {degree.eduCodeValue}</p>
-            </div>
-            <li>&#8250;</li>
+            </div> */}
+            {/* <li>&#8250;</li> */}
           </div>
         </div>
       ))}
@@ -150,7 +150,7 @@ const CompanySearchPage = () => {
         </div>
 
         <Searchbar handleSearch={handleSearch} placeholder={'Etsi koulutus'} />
-        <h2>Ammatilliset tutkinnot</h2>
+        <h2>Valitse tutkinnot</h2>
         <div className="searchPage__container--list">
           <CheckLength
             filteredList={filteredList}

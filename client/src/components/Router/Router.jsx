@@ -33,6 +33,7 @@ import CompanySearchPage from '../../pages/CompanyInfo/CompanySearchPage/Company
 import CompanyDegreeUnits from '../../pages/CompanyInfo/CompanyDegreeUnits/CompanyDegreeUnits';
 import DegreeConfirmSelection from '../../pages/CompanyInfo/DegreeConfirmSelection/DegreeConfirmSelection';
 import UserPerformance from '../../pages/Performance/UserPerformance/UserPerformance';
+import AddCompanyName from '../../pages/AddCompanyName/AddCompanyName';
 
 const Router = () => {
   let location = useLocation();
@@ -110,7 +111,8 @@ const Router = () => {
             <Route path='/degrees/:degreeId/units/tasks' element={<SpecifyTasks />} />
             <Route path='/degrees/:degreeId/summary' element={<Summary />} />
 
-            {/* Workplace flow */}
+            {/* Workpla ce flow */}
+            <Route path='/add/companyname' element={<AddCompanyName></AddCompanyName>} />
             <Route path='/company-info' element={<CompanyInfo />} />
             <Route path='/internal/degrees' element={<CompanySearchPage />} />
             <Route path='internal/degrees/:degreeId/units' element={<CompanyDegreeUnits />} />
