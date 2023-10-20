@@ -28,7 +28,7 @@ function DegreeConfirmSelection() {
 
   useEffect(() => {
     setinternalDegreeId(params.degreeId);
-    // console.log('internal degree-------------', internalDegree);
+    // console.log('internal degree-------------', params.degreeId);
   }, [params.degreeId]);
 
   const checkedUnits = useUnitsStore((state) => state.checkedUnits);
@@ -89,23 +89,24 @@ function DegreeConfirmSelection() {
       const supervisorIds = await Promise.all(supervisorData);
       // console.log('Supervisor IDs:', supervisorIds);
 
-      let departmentData = null;
+      let departmentData = [];
 
-      if (departments) {
-        departmentData = Object.keys(departments).map((key) => {
-          const department = { name: departments[key] };
-          const departmentSupervisor = supervisorIds;
-          // Check if the department exists in Zustand
-          if (departments[key].length > 0) {
-            // If the department exists, save supervisors to department.supervisors
-            department.supervisors = departmentSupervisor;
-          } else {
-            // If the department does not exist, save supervisors to the main supervisors array
-            supervisors.push(...departmentSupervisor);
-          }
-          return department;
-        });
-      }
+
+      departmentData = Object.keys(departments).map((key) => {
+        const department = { name: departments[key] };
+        const departmentSupervisor = supervisorIds;
+        // Check if the department exists in Zustand
+        if (departments[key].length > 0) {
+          // If the department exists, save supervisors to department.supervisors
+          department.supervisors = departmentSupervisor;
+        } else {
+          // If the department does not exist, save supervisors to the main supervisors array
+          supervisors.push(...supervisorIds);
+        }
+
+        return department;
+      });
+
 
       const workplaceData = {
         supervisors: supervisorIds,
@@ -118,7 +119,7 @@ function DegreeConfirmSelection() {
           name: {
             fi: unit.name.fi,
           },
-          assessments: [],
+          // assessments: [],
         }))
 
       };
@@ -225,4 +226,13 @@ function DegreeConfirmSelection() {
 }
 
 export default DegreeConfirmSelection;
+
+
+
+
+
+
+
+
+
 

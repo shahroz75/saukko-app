@@ -153,7 +153,7 @@ workplaceRouter.put("/workplace/:id", async (req, res) => {
 workplaceRouter.post("/workplace", async (req, res) => {
   try {
     // Extract workplace data from the request body
-    const { businessId, name, supervisors, departments, units } = req.body;
+    const { businessId, name, supervisors, departments, units, degreeId } = req.body;
 
     // Check if a workplace with the same businessId already exists
     const existingWorkplace = await Workplace.findOne({ businessId });
@@ -165,6 +165,7 @@ workplaceRouter.post("/workplace", async (req, res) => {
       existingWorkplace.supervisors = supervisors;
       existingWorkplace.departments = departments;
       existingWorkplace.units = units;
+      existingWorkplace.degreeId = degreeId;
       await existingWorkplace.save();
       console.log(" workplace updated successfully");
       //  returning the updated document as a response
@@ -178,7 +179,8 @@ workplaceRouter.post("/workplace", async (req, res) => {
       name,
       supervisors,
       departments,
-      units
+      units,
+      degreeId
     });
 
     // Save the new workplace to the database
