@@ -75,6 +75,11 @@ export const InternalApiContextProvider = (props) => {
   const degreeFound = Object.keys(internalDegree).length > 0 ? true : false;
   const clearCheckedUnits = useUnitsStore((state) => state.clearCheckedUnits);
 
+  useEffect(() => {
+    clearCheckedUnits();
+    setInternalDegree({});
+  }, [internalDegreeId]);
+
   if (loading) {
     return (
       <div
