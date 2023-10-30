@@ -13,7 +13,7 @@ const CheckLength = ({ filteredList, allDegrees, paginate, currentPage }) => {
   const list = filteredList.length > 0 ? filteredList : allDegrees;
 
   const navigate = useNavigate();
-  console.log('serach page........', navigate)
+  // console.log('serach page........', navigate)
   const { setDegreeId } = useContext(ExternalApiContext);
 
   const handleChooseDegree = async (degreeId) => {
