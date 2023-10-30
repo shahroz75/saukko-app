@@ -1,4 +1,4 @@
-import axios from 'axios' 
+import axios from 'axios'
 
 const baseURL = process.env.REACT_APP_BACKEND_URL
 
@@ -36,8 +36,9 @@ const postDegree = async degree => {
 
 export {
   // Eperusteet routes:
-  fetchDegreesFromEperusteet, fetchDegreeByIdFromEperusteet, 
+  fetchDegreesFromEperusteet, fetchDegreeByIdFromEperusteet,
   // Internal saukko database routes:
   fetchInternalDegrees, fetchInternalDegreeById,
   postDegree
 }
+
