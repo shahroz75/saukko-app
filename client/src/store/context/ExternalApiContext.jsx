@@ -96,3 +96,25 @@ export default ExternalApiContext;
 
 
 
+  // Fetch all degrees from ePerusteet when the user is a teacher
+  // useEffect(() => {
+  //   if (user && user.role === 'teacher') {
+  //     const getDegrees = async () => {
+  //       try {
+  //         setallLoading(true);
+  //         const response = await fetchDegreesFromEperusteet();
+  //         console.log('ePerusteet degrees: ', response.data);
+  //         setAllDegrees(response.data);
+  //       } catch (err) {
+  //         console.error(err);
+  //       } finally {
+  //         setallLoading(false);
+  //       }
+  //     };
+  //     getDegrees();
+  //   }
+  // }, [user]);
+
+
+
+
