@@ -77,8 +77,8 @@ function DegreeInfo() {
       setDiaryNumber(degree.diaryNumber)
       setRegulationDate(parseDate(degree.regulationDate))
       setValidFrom(parseDate(degree.validFrom))
-      setExpiry(degree.expiry ? parseDate(degree.expiry) : 'ei dataa APIsta')
-      setTransitionEnds(degree.transitionEnds ? parseDate(degree.transitionEnds) : 'ei dataa APIsta')
+      setExpiry(degree.expiry ? parseDate(degree.expiry) : 'Taydennä puuttuvat tiedot')
+      setTransitionEnds(degree.transitionEnds ? parseDate(degree.transitionEnds) : '  Taydennä puuttuvat tiedot')
     }
 
     // If fetch by ID fails set data from all degrees 
@@ -86,13 +86,13 @@ function DegreeInfo() {
       if (!degreeDescription || !degreeName || !diaryNumber || !regulationDate || !validFrom || !expiry || !transitionEnds) {
         const matchingDegree = allDegrees.find(degree => degree._id === parseInt(params.degreeId))
         if (matchingDegree) {
-          setDegreeDescription('ei dataa APIsta')
+          setDegreeDescription('  Taydennä puuttuvat tiedot')
           setDegreeName(matchingDegree.name.fi)
           setDiaryNumber(matchingDegree.diaryNumber)
-          setRegulationDate('ei dataa APIsta')
-          setValidFrom('ei dataa APIsta')
-          setExpiry('ei dataa APIsta')
-          setTransitionEnds('ei dataa APIsta')
+          setRegulationDate('  Taydennä puuttuvat tiedot')
+          setValidFrom('  Taydennä puuttuvat tiedot')
+          setExpiry('  Taydennä puuttuvat tiedot')
+          setTransitionEnds('  Taydennä puuttuvat tiedot')
         }
       }
     }
@@ -143,10 +143,10 @@ function DegreeInfo() {
     const datePattern = /^\d{2}\.\d{2}.\d{4}$/;
 
     if (
-      (typeof regulationDate === 'string' && regulationDate !== 'ei dataa APIsta' && regulationDate !== '' && !datePattern.test(regulationDate)) ||
-      (typeof validFrom === 'string' && validFrom !== 'ei dataa APIsta' && validFrom !== '' && !datePattern.test(validFrom)) ||
-      (typeof expiry === 'string' && expiry !== 'ei dataa APIsta' && expiry !== '' && !datePattern.test(expiry)) ||
-      (typeof transitionEnds === 'string' && transitionEnds !== 'ei dataa APIsta' && transitionEnds !== '' && !datePattern.test(transitionEnds))
+      (typeof regulationDate === 'string' && regulationDate !== '  Taydennä puuttuvat tiedot' && regulationDate !== '' && !datePattern.test(regulationDate)) ||
+      (typeof validFrom === 'string' && validFrom !== '  Taydennä puuttuvat tiedot' && validFrom !== '' && !datePattern.test(validFrom)) ||
+      (typeof expiry === 'string' && expiry !== '  Taydennä puuttuvat tiedot' && expiry !== '' && !datePattern.test(expiry)) ||
+      (typeof transitionEnds === 'string' && transitionEnds !== '  Taydennä puuttuvat tiedot' && transitionEnds !== '' && !datePattern.test(transitionEnds))
     ) {
       setOpenNotificationModalDate(true);
       return;
