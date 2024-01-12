@@ -1,13 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import AuthContext from '../../../store/context/AuthContext';
 
-const PerformancesFeedback = () => {
+const PerformancesFeedback = ({
+  selectedValues,
+  setSelectedValues,
+  answer,
+  answerSupervisor,
+}) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [selectedRadio, setSelectedRadio] = useState();
+  const [selectedRadio, setSelectedRadio] = useState('');
+  const [answerState, setAnswerState] = useState(answer);
+  const [answerSupervisorState, setAnswerSupervisorState] =
+    useState(answerSupervisor);
 
   const auth = useContext(AuthContext);
   const user = auth.user;
@@ -15,7 +23,17 @@ const PerformancesFeedback = () => {
   const handleRadioChange = (event) => {
     // console.log("Selected Radio Value:", event.target.value);
     setSelectedRadio(event.target.value);
+    if (event.target.value === 'Osaa ohjatusti') {
+      setSelectedValues(1);
+    } else if (event.target.value === 'Osaa itsenäisesti') {
+      setSelectedValues(2);
+    }
+    console.log(event.target.value);
   };
+
+  useEffect(() => {
+    console.log('selectedValues changed:', selectedValues);
+  }, [selectedValues]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -56,20 +74,20 @@ const PerformancesFeedback = () => {
             aria-labelledby='demo-form-control-label-placement'
             name='position'
             value={selectedRadio}
-          >
+            onChange={handleRadioChange}          >
             <FormControlLabel
-              value='top'
-              control={<Radio />}
+              value='Osaa ohjatusti'
+              control={<Radio onChange={handleRadioChange} />}
               label='Osaa ohjatusti'
               labelPlacement='top'
-              onChange={handleRadioChange}
+              // onChange={handleRadioChange}
             />
             <FormControlLabel
-              value='end'
-              control={<Radio />}
+              value='Osaa itsenäisesti'
+              control={<Radio onChange={handleRadioChange} />}
               label='Osaa itsenäisesti'
               labelPlacement='top'
-              onChange={handleRadioChange}
+              // onChange={handleRadioChange}
             />
           </RadioGroup>
         </FormControl>

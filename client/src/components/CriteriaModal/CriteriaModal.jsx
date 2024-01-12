@@ -41,7 +41,7 @@ function BootstrapDialogTitle(props) {
   );
 }
 
-export default function CriteriaModal({ open, handleClose}) {
+export default function CriteriaModal({ open, handleClose }) {
   let bgColor = '#e5eff8';
   let color = '#0062b9';
 
@@ -91,15 +91,10 @@ export default function CriteriaModal({ open, handleClose}) {
             margin='0 1rem 3rem'
           >
             <Typography padding='1rem'>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-              <p>
-                Minima enim dignissimos aliquam et animi accusantium illo
-                laboriosam pariatur inventore!
-              </p>
-              <p>
-                Fugit ullam debitis hic doloremque aperiam eum temporibus
-                deserunt amet similique.
-              </p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
+              accusamus illum quo odio cumque maiores error perspiciatis ea
+              libero quaerat dolor tempore, officiis porro aliquid quae
+              accusantium cum. Ex, similique?
             </Typography>
           </Box>
         </DialogContent>
