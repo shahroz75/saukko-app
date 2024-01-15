@@ -5,13 +5,25 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import AuthContext from '../../../store/context/AuthContext';
 
-const TeacherPerformanceFeedBack = () => {
-  const [selectedRadio, setSelectedRadio] = useState();
+const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
+  const [selectedRadio, setSelectedRadio] = useState('');
   const auth = useContext(AuthContext);
   const user = auth.user;
 
   const handleRadioChange = (e) => {
-    setSelectedRadio(e.target.value);
+    if (selectedRadio === e.target.value) {
+      e.target.checked = false;
+      setSelectedRadio('');
+      setSelectedValues(0);
+    } else {
+      setSelectedRadio(e.target.value);
+      if (e.target.value === 'Osaa ohjatusti') {
+        setSelectedValues(1);
+      } else if (e.target.value === 'Osaa itsenäisesti') {
+        setSelectedValues(2);
+      }
+    }
+    console.log(selectedRadio);
   };
 
   const getBackgroundColor = () => {
@@ -38,59 +50,76 @@ const TeacherPerformanceFeedBack = () => {
     },
   ];
 
-
   return (
-    <main className='feedback__wrapper' style={{ backgroundColor: getBackgroundColor() }}>
-      <div className='first-div-style' style={{ width: '60%', marginLeft: '38%' }}>
+    <main
+      className='feedback__wrapper'
+      style={{ backgroundColor: getBackgroundColor() }}
+    >
+      <div
+        className='first-div-style'
+        style={{ width: '60%', marginLeft: '38%' }}
+      >
         <p style={{ padding: '2px' }}>Osaa ohjatusti</p>
         <p style={{ padding: '4px' }}>Osaa itsenäisesti</p>
-
       </div>
       <div>
-        {infodata.map((item, index) => (
-          <div key={index} className='first-div-style'>
-            <p style={{ width: '38%', marginTop: '10px' }}>{item.info}</p>
-            <div style={{ marginTop: '10px' }}>
-              <FormControl>
-                <RadioGroup
-                  row
-                  aria-labelledby='demo-form-control-label-placement'
-                  name='position'
-                >
-                  <FormControlLabel
-                    value='top'
-                    control={<Radio />}
-                    sx={{
-                      '& .MuiSvgIcon-root': {
-                        marginRight: '70px',
-                      },
-                    }}
+        {['Itsearviointi', 'TPO:n havainto', 'Opettajan merkintä'].map(
+          (label, index) => (
+            <div key={label} className='first-div-style'>
+              <p style={{ width: '38%', marginTop: '10px' }}>{label}</p>
+              <div style={{ marginTop: '10px' }}>
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby='demo-form-control-label-placement'
+                    name='position'
+                    value={selectedRadio}
                     onChange={handleRadioChange}
-                    disabled={item.disabled}
-                    checked={item.disabled || selectedRadio === 'top'}
-                  />
-                  <FormControlLabel
-                    value='start'
-                    control={<Radio />}
-                    sx={{
-                      '& .MuiSvgIcon-root': {
-                        marginRight: '8%',
-                      },
-                    }}
-                    onChange={handleRadioChange}
-                  />
-                </RadioGroup>
-              </FormControl>
+                  >
+                    <FormControlLabel
+                      value='Osaa ohjatusti'
+                      sx={{
+                        '& .MuiSvgIcon-root': {
+                          marginRight: '70px',
+                        },
+                      }}
+                      control={
+                        <Radio
+                          disabled={label !== 'Opettajan merkintä'}
+                          onChange={handleRadioChange}
+                        />
+                      }
+                      checked={index < 2 || selectedRadio === 'Osaa ohjatusti'}
+                      labelPlacement='start'
+                    />
+                    <FormControlLabel
+                      value='Osaa itsenäisesti'
+                      sx={{
+                        '& .MuiSvgIcon-root': {
+                          marginRight: '8%',
+                        },
+                      }}
+                      control={
+                        <Radio
+                          disabled={label !== 'Opettajan merkintä'}
+                          onChange={handleRadioChange}
+                        />
+                      }
+                      checked={
+                        label === 'Opettajan merkintä' &&
+                        selectedRadio === 'Osaa itsenäisesti'
+                      }
+                      labelPlacement='top'
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
     </main>
   );
 };
 
 export default TeacherPerformanceFeedBack;
-
-
-
-

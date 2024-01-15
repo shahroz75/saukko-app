@@ -35,7 +35,7 @@ const UserPerformance = () => {
   const [textareaValue, setTextareaValue] = useState('');
   const { evaluation } = useContext(InternalApiContext);
   const evaluationId = evaluation._id;
-  const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedValues, setSelectedValues] = useState({});
   const { openNotificationModal, setOpenNotificationModal } = useStore();
   const [isCriteriaModalOpen, setIsCriteriaModalOpen] = useState(false);
   const ownEvaluation = useFetchData(evaluationId);
@@ -132,8 +132,9 @@ const UserPerformance = () => {
       </h2>
 
       <div>
-        {/* <ul>
-          {mockdata.map((data, index) => (
+        {/* Evaluation */}
+        <ul>
+          {ownEvaluation.map((unit, index) => (
             <li key={index}>
               <div
                 style={{
@@ -144,7 +145,7 @@ const UserPerformance = () => {
                 }}
               >
                 <div>
-                  <p className='para-title-style'>{data.title} </p>
+                  <p className='para-title-style'>{unit.name.fi} </p>
                 </div>
                 <div>
                   <Icon
@@ -156,23 +157,9 @@ const UserPerformance = () => {
                   />
                 </div>
               </div>
-              {user?.role === 'teacher' ? (
-                <TeacherPerformanceFeedBack />
-              ) : (
-                <PerformancesFeedback />
-              )}
-            </li>
-          ))}
-        </ul> */}
-
-        {/* Evaluation */}
-        <ul>
-          {ownEvaluation.map((unit, index) => (
-            <li key={index}>
-              <p className='para-title-style'>{unit.name.fi}</p>
-              <p>Customer answer: {unit.assessments[0].answer}</p>
+              {/* <p>Customer answer: {unit.assessments[0].answer}</p>
               <p>Supervisor answer: {unit.assessments[0].answerSupervisor}</p>
-              <p>Teacher answer: {unit.assessments[0].answerTeacher}</p>
+              <p>Teacher answer: {unit.assessments[0].answerTeacher}</p> */}
               {user?.role === 'teacher' ? (
                 <TeacherPerformanceFeedBack
                   selectedValues={selectedValues}
@@ -182,52 +169,10 @@ const UserPerformance = () => {
                 <PerformancesFeedback
                   selectedValues={selectedValues}
                   setSelectedValues={setSelectedValues}
-                  // onAnswersChange={handleAnswersChange}
                 />
               )}
             </li>
           ))}
-          {/* {ownEvaluation.map((unit, index) => (
-            <li key={index}>
-              <p className='para-title-style'>{unit.name.fi}</p>
-              {unit.assessments.length === 0 ? (
-                <div>
-                  <p>No assessments available</p>
-                  {user?.role === 'teacher' ? (
-                    <TeacherPerformanceFeedBack
-                      answer=''
-                      answerSupervisor=''
-                      answerTeacher=''
-                    />
-                  ) : (
-                    <PerformancesFeedback answer='' answerSupervisor='' />
-                  )}
-                </div>
-              ) : (
-                unit.assessments.map((assess, assessIndex) => (
-                  <div key={assessIndex}>
-                    <p>Assessments: {assess.name.fi}</p>
-                    <p>Assessments: {assess.answer}</p>
-                    <p>Assessments: {assess.answerSupervisor}</p>
-                    <p>Assessments: {assess.answerTeacher}</p>
-                    {user?.role === 'teacher' ? (
-                      <TeacherPerformanceFeedBack
-                        answer={assess.answer}
-                        answerSupervisor={assess.answerSupervisor}
-                        answerTeacher={assess.answerTeacher}
-                      />
-                    ) : (
-                      <PerformancesFeedback
-                        answer={assess.answer}
-                        answerSupervisor={assess.answerSupervisor}
-                        setSelectedValues={setSelectedValues}
-                      />
-                    )}
-                  </div>
-                ))
-              )}
-            </li>
-          ))} */}
         </ul>
       </div>
       {error && <p>{error}</p>}

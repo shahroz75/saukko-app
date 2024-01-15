@@ -5,17 +5,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import AuthContext from '../../../store/context/AuthContext';
 
-const PerformancesFeedback = ({
-  selectedValues,
-  setSelectedValues,
-  answer,
-  answerSupervisor,
-}) => {
+const PerformancesFeedback = ({ selectedValues, setSelectedValues }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState('');
-  const [answerState, setAnswerState] = useState(answer);
-  const [answerSupervisorState, setAnswerSupervisorState] =
-    useState(answerSupervisor);
 
   const auth = useContext(AuthContext);
   const user = auth.user;
@@ -74,20 +66,19 @@ const PerformancesFeedback = ({
             aria-labelledby='demo-form-control-label-placement'
             name='position'
             value={selectedRadio}
-            onChange={handleRadioChange}          >
+            onChange={handleRadioChange}
+          >
             <FormControlLabel
               value='Osaa ohjatusti'
               control={<Radio onChange={handleRadioChange} />}
               label='Osaa ohjatusti'
               labelPlacement='top'
-              // onChange={handleRadioChange}
             />
             <FormControlLabel
               value='Osaa itsenäisesti'
               control={<Radio onChange={handleRadioChange} />}
               label='Osaa itsenäisesti'
               labelPlacement='top'
-              // onChange={handleRadioChange}
             />
           </RadioGroup>
         </FormControl>
