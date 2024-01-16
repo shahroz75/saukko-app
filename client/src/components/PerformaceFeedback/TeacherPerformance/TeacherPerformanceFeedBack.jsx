@@ -23,11 +23,11 @@ const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
         setSelectedValues(2);
       }
     }
-    console.log(selectedRadio);
+    console.log(e.target.value);
   };
 
   const getBackgroundColor = () => {
-    if (selectedRadio === 'top' || selectedRadio === 'start') {
+    if (selectedRadio === 'Osaa ohjatusti' || selectedRadio === 'Osaa itsenäisesti') {
       if (user?.role === 'teacher') {
         return '#FFF4B4';
       }
@@ -35,20 +35,20 @@ const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
     return '#F2F2F2';
   };
 
-  const infodata = [
-    {
-      info: 'Itsearviointi',
-      disabled: true,
-    },
-    {
-      info: 'TPO:n havainto',
-      disabled: true,
-    },
-    {
-      info: 'Opettajan merkintä',
-      disabled: false,
-    },
-  ];
+  // const infodata = [
+  //   {
+  //     info: 'Itsearviointi',
+  //     disabled: true,
+  //   },
+  //   {
+  //     info: 'TPO:n havainto',
+  //     disabled: true,
+  //   },
+  //   {
+  //     info: 'Opettajan merkintä',
+  //     disabled: false,
+  //   },
+  // ];
 
   return (
     <main
@@ -90,7 +90,7 @@ const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
                         />
                       }
                       checked={index < 2 || selectedRadio === 'Osaa ohjatusti'}
-                      labelPlacement='start'
+                      labelPlacement='top'
                     />
                     <FormControlLabel
                       value='Osaa itsenäisesti'
@@ -109,7 +109,7 @@ const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
                         label === 'Opettajan merkintä' &&
                         selectedRadio === 'Osaa itsenäisesti'
                       }
-                      labelPlacement='top'
+                      labelPlacement='start'
                     />
                   </RadioGroup>
                 </FormControl>
