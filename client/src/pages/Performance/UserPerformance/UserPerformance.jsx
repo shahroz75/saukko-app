@@ -147,6 +147,11 @@ const UserPerformance = () => {
                 <div>
                   <p className='para-title-style'>{unit.name.fi} </p>
                 </div>
+                {unit.assessments.map((assess, index) => (
+                  <div key={index}>
+                    <p>Assessment: {assess.name.fi}</p>
+                  </div>
+                ))}
                 <div>
                   <Icon
                     icon='material-symbols:info'
