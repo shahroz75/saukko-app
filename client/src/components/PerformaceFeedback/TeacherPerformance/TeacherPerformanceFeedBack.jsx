@@ -5,25 +5,35 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import AuthContext from '../../../store/context/AuthContext';
 
-const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
+const TeacherPerformanceFeedBack = ({ setSelectedValues, unit, setSelectedUnitId }) => {
+  console.log("🚀 ~ TeacherPerformanceFeedBack ~ unit:", unit)
   const [selectedRadio, setSelectedRadio] = useState('');
+  
   const auth = useContext(AuthContext);
   const user = auth.user;
 
-  const handleRadioChange = (e) => {
-    if (selectedRadio === e.target.value) {
-      e.target.checked = false;
-      setSelectedRadio('');
-      setSelectedValues(0);
-    } else {
-      setSelectedRadio(e.target.value);
-      if (e.target.value === 'Osaa ohjatusti') {
-        setSelectedValues(1);
-      } else if (e.target.value === 'Osaa itsenäisesti') {
-        setSelectedValues(2);
+  const handleRadioChange = (e, unit) => {
+    console.log("🚀 ~ handleRadioChange ~ unit:", unit)
+    // console.log("🚀 ~ handleRadioChange ~ e:", e)
+    // console.log("🚀 ~ handleRadioChange ~ console: ctr + alt + L", )
+    setSelectedUnitId(unit._id); // This is the unit id
+    console.log("🚀 ~ handleRadioChange ~ unit._id:", unit._id)
+    console.log()
+    if (e.target) {
+      if (selectedRadio === e.target.value) {
+        e.target.checked = false;
+        setSelectedRadio('');
+        setSelectedValues(0);
+      } else {
+        setSelectedRadio(e.target.value);
+        if (e.target.value === 'Osaa ohjatusti') {
+          setSelectedValues(1);
+        } else if (e.target.value === 'Osaa itsenäisesti') {
+          setSelectedValues(2);
+        }
       }
+      console.log(e.target.value);
     }
-    console.log(e.target.value);
   };
 
   const getBackgroundColor = () => {
@@ -74,7 +84,7 @@ const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
                     aria-labelledby='demo-form-control-label-placement'
                     name='position'
                     value={selectedRadio}
-                    onChange={handleRadioChange}
+                    unit={unit}
                   >
                     <FormControlLabel
                       value='Osaa ohjatusti'
@@ -86,8 +96,7 @@ const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
                       control={
                         <Radio
                           disabled={label !== 'Opettajan merkintä'}
-                          onChange={handleRadioChange}
-                        />
+                          onChange={(e) => handleRadioChange(e, unit)}                        />
                       }
                       checked={index < 2 || selectedRadio === 'Osaa ohjatusti'}
                       labelPlacement='top'
@@ -102,7 +111,7 @@ const TeacherPerformanceFeedBack = ({ setSelectedValues }) => {
                       control={
                         <Radio
                           disabled={label !== 'Opettajan merkintä'}
-                          onChange={handleRadioChange}
+                          onChange={(e) => handleRadioChange(e, unit)}
                         />
                       }
                       checked={

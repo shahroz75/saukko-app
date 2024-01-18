@@ -5,16 +5,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import AuthContext from '../../../store/context/AuthContext';
 
-const PerformancesFeedback = ({ selectedValues, setSelectedValues }) => {
+const PerformancesFeedback = ({ selectedValues, setSelectedValues, unit, setSelectedUnitId }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState('');
 
   const auth = useContext(AuthContext);
   const user = auth.user;
 
-  const handleRadioChange = (event) => {
-    // console.log("Selected Radio Value:", event.target.value);
+  const handleRadioChange = (event, unit) => {
     setSelectedRadio(event.target.value);
+    setSelectedUnitId(unit._id); // This is the unit id
     if (event.target.value === 'Osaa ohjatusti') {
       setSelectedValues(1);
     } else if (event.target.value === 'Osaa itsenäisesti') {
@@ -44,7 +44,7 @@ const PerformancesFeedback = ({ selectedValues, setSelectedValues }) => {
   // Defining the background color based on the user role
 
   const getBackgroundColor = () => {
-    if (selectedRadio === 'top' || selectedRadio === 'end') {
+    if (selectedRadio === 'Osaa ohjatusti' || selectedRadio === 'Osaa itsenäisesti') {
       if (user?.role === 'supervisor') {
         return '#F6E2E6';
       } else if (user?.role === 'customer') {
@@ -66,17 +66,18 @@ const PerformancesFeedback = ({ selectedValues, setSelectedValues }) => {
             aria-labelledby='demo-form-control-label-placement'
             name='position'
             value={selectedRadio}
-            onChange={handleRadioChange}
+            unit={unit}
+            // onChange={handleRadioChange}
           >
             <FormControlLabel
               value='Osaa ohjatusti'
-              control={<Radio onChange={handleRadioChange} />}
+              control={<Radio onChange={(event) => handleRadioChange(event, unit)}  />}
               label='Osaa ohjatusti'
               labelPlacement='top'
             />
             <FormControlLabel
               value='Osaa itsenäisesti'
-              control={<Radio onChange={handleRadioChange} />}
+              control={<Radio onChange={(event) => handleRadioChange(event, unit)}  />}
               label='Osaa itsenäisesti'
               labelPlacement='top'
             />

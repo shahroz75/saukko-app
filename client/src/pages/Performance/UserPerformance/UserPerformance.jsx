@@ -39,6 +39,7 @@ const UserPerformance = () => {
   const { openNotificationModal, setOpenNotificationModal } = useStore();
   const [isCriteriaModalOpen, setIsCriteriaModalOpen] = useState(false);
   const ownEvaluation = useFetchData(evaluationId);
+  const [selectedUnitId, setSelectedUnitId] = useState(null);
   // Add a state for error
   const [error, setError] = useState(null);
 
@@ -65,27 +66,33 @@ const UserPerformance = () => {
 
   const handleSubmit = async () => {
     const updatedUnits = ownEvaluation.map((unit) => {
-      return {
-        ...unit,
-        assessments: unit.assessments.map((assessment) => {
-          let answer = assessment.answer;
-          let answerSupervisor = assessment.answerSupervisor;
-          let answerTeacher = assessment.answerTeacher;
-          if (user?.role === 'customer') {
-            answer = selectedValues === 1 ? 1 : 2;
-          } else if (user?.role === 'supervisor') {
-            answerSupervisor = selectedValues === 1 ? 1 : 2;
-          } else if (user?.role === 'teacher') {
-            answerTeacher = selectedValues === 1 ? 1 : 2;
-          }
-          return {
-            ...assessment,
-            answer,
-            answerSupervisor,
-            answerTeacher,
-          };
-        }),
-      };
+      // Check if the current unit is the one selected
+      if (unit._id === selectedUnitId) {
+        return {
+          ...unit,
+          assessments: unit.assessments.map((assessment) => {
+            let answer = assessment.answer;
+            let answerSupervisor = assessment.answerSupervisor;
+            let answerTeacher = assessment.answerTeacher;
+            if (user?.role === 'customer') {
+              answer = selectedValues === 1 ? 1 : 2;
+            } else if (user?.role === 'supervisor') {
+              answerSupervisor = selectedValues === 1 ? 1 : 2;
+            } else if (user?.role === 'teacher') {
+              answerTeacher = selectedValues === 1 ? 1 : 2;
+            }
+            return {
+              ...assessment,
+              answer,
+              answerSupervisor,
+              answerTeacher,
+            };
+          }),
+        };
+      } else {
+        // If the current unit is not the one selected, return it as is
+        return unit;
+      }
     });
     const updatedData = {
       units: updatedUnits,
@@ -145,13 +152,8 @@ const UserPerformance = () => {
                 }}
               >
                 <div>
-                  <p className='para-title-style'>{unit.name.fi} </p>
+                  <p className='para-title-style'>unit: {unit.name.fi} </p>
                 </div>
-                {unit.assessments.map((assess, index) => (
-                  <div key={index}>
-                    <p>Assessment: {assess.name.fi}</p>
-                  </div>
-                ))}
                 <div>
                   <Icon
                     icon='material-symbols:info'
@@ -162,18 +164,30 @@ const UserPerformance = () => {
                   />
                 </div>
               </div>
-              {/* <p>Customer answer: {unit.assessments[0].answer}</p>
-              <p>Supervisor answer: {unit.assessments[0].answerSupervisor}</p>
-              <p>Teacher answer: {unit.assessments[0].answerTeacher}</p> */}
+              {unit.assessments.map((assess, index) => (
+                <div key={index}>
+                  <p>Assessment: {assess.name.fi}</p>
+                  <p>Student: {assess.answer}</p>
+                  <p>Supervisor: {assess.answerSupervisor}</p>
+                  <p>Teacher: {assess.answerTeacher}</p>
+                </div>
+              ))}
+
               {user?.role === 'teacher' ? (
                 <TeacherPerformanceFeedBack
                   selectedValues={selectedValues}
                   setSelectedValues={setSelectedValues}
+                  unit={unit}
+                  setSelectedUnitId={setSelectedUnitId}
+                  selectedUnitId={selectedUnitId}
                 />
               ) : (
                 <PerformancesFeedback
                   selectedValues={selectedValues}
                   setSelectedValues={setSelectedValues}
+                  unit={unit}
+                  setSelectedUnitId={setSelectedUnitId}
+                  selectedUnitId={selectedUnitId}
                 />
               )}
             </li>
