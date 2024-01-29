@@ -13,10 +13,12 @@ const evaluationSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // User._id
   },
-  supervisorIds: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  }],
+  supervisorIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   workplaceId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Workplace', // Workplace._id
@@ -39,6 +41,11 @@ const evaluationSchema = mongoose.Schema({
   completed: {
     type: Boolean,
     default: false,
+  },
+  status: {
+    type: Number,
+    default: 0,
+    enum: [0, 1, 2],
   },
   degreeId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -72,6 +79,10 @@ const evaluationSchema = mongoose.Schema({
         type: Number,
         default: 0,
         enum: [0, 1, 2, 3],
+      },
+      ready: {
+        type: Boolean,
+        default: false,
       },
       // Name of the unit in Finnish and Swedish
       name: {
@@ -116,14 +127,12 @@ const evaluationSchema = mongoose.Schema({
             type: Number,
             default: 0,
             enum: [0, 1, 2, 3],
-          }
+          },
         },
-        
       ],
     },
   ],
 });
-
 
 /* Keeping this for later fixes.
 units: [
@@ -204,7 +213,6 @@ units: [
   }
 ]
 })*/
-
 
 evaluationSchema.set('toJSON', {
   transform: (document, returnedObject) => {
