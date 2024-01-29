@@ -91,7 +91,7 @@ const UserPerformance = () => {
         <textarea
           rows={8}
           cols={38}
-          style={{ width: '87%', padding: '5px', padding: '5px' }}
+          style={{ width: '87%', padding: '5px' }}
           className='para-title-style'
           value={textareaValue}
           onChange={(e) => setTextareaValue(e.target.value)}
