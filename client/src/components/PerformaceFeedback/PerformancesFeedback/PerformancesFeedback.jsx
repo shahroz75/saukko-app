@@ -83,7 +83,10 @@ const PerformancesFeedback = ({
             // onClick={(event) => handleRadioChange(event, unit)}
           >
             <FormControlLabel
-              value='Osaa ohjatusti'
+              type="radio"
+              name="Osaa ohjatusti"
+              id="Osaa ohjatusti"
+              value={1}
               control={
                 <Radio onClick={(event) => handleRadioUncheck(event)} onChange={(event) => handleRadioChange(event, unit)} />
               }
@@ -91,7 +94,10 @@ const PerformancesFeedback = ({
               labelPlacement='top'
             />
             <FormControlLabel
-              value='Osaa itsenäisesti'
+              type="radio"
+              name='Osaa itsenäisesti'
+              id="Osaa itsenäisesti"
+              value={2}
               control={
                 <Radio onClick={(event) => handleRadioUncheck(event)} onChange={(event) => handleRadioChange(event, unit)} />
               }

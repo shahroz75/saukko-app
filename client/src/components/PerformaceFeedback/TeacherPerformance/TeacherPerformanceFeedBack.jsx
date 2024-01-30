@@ -95,7 +95,10 @@ const TeacherPerformanceFeedBack = ({
                   onClick={(e) => handleRadioChange(item.info, e, unit)}
                 >
                   <FormControlLabel
-                    value='Osaa ohjatusti'
+                    type="radio"
+                    name="Osaa ohjatusti"
+                    id="Osaa ohjatusti"
+                    value={1}
                     // control={<Radio />}
                     sx={{
                       '& .MuiSvgIcon-root': {
@@ -113,7 +116,10 @@ const TeacherPerformanceFeedBack = ({
                     checked={index < 2 || selectedRadio === 'Osaa ohjatusti'}
                   />
                   <FormControlLabel
-                    value='Osaa itsenäisesti'
+                    type="radio"
+                    name="Osaa itsenäisesti"
+                    id="Osaa itsenäisesti"
+                    value={2}
                     // control={<Radio />}
                     sx={{
                       '& .MuiSvgIcon-root': {
