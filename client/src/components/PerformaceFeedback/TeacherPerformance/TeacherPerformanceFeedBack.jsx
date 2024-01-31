@@ -1,9 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import AuthContext from '../../../store/context/AuthContext';
+
+import { fetchEvaluationById, updateEvaluationById, } from '../../../api/evaluation';
+
 
 const TeacherPerformanceFeedBack = ({
   setSelectedValues,
@@ -51,19 +54,26 @@ const TeacherPerformanceFeedBack = ({
     return '#F2F2F2';
   };
 
+  const [ answer, setAnswer ] = useState('');
+  const [ answerSupervisor, setAnswerSupervisor ] = useState('');
+  const [ answerTeacher, setAnswerTeacher ] = useState('');
+
   // Mock data
   const infodata = [
     {
       info: 'Itsearviointi',
       disabled: true,
+      value: 0 || 1 || 2,
     },
     {
       info: 'TPO:n havainto',
       disabled: true,
+      value: 0 || 1 || 2,
     },
     {
       info: 'Opettajan merkintä',
       disabled: false,
+      value: 0 || 1 || 2,
     },
   ];
 

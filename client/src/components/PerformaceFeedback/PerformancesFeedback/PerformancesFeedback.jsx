@@ -88,7 +88,9 @@ const PerformancesFeedback = ({
               id="Osaa ohjatusti"
               value={1}
               control={
-                <Radio onClick={(event) => handleRadioUncheck(event)} onChange={(event) => handleRadioChange(event, unit)} />
+                <Radio 
+                  onClick={(event) => handleRadioUncheck(event)} 
+                  onChange={(event) => handleRadioChange(event, unit)} />
               }
               label='Osaa ohjatusti'
               labelPlacement='top'
@@ -99,7 +101,9 @@ const PerformancesFeedback = ({
               id="Osaa itsenäisesti"
               value={2}
               control={
-                <Radio onClick={(event) => handleRadioUncheck(event)} onChange={(event) => handleRadioChange(event, unit)} />
+                <Radio 
+                  onClick={(event) => handleRadioUncheck(event)} 
+                  onChange={(event) => handleRadioChange(event, unit)} />
               }
               label='Osaa itsenäisesti'
               labelPlacement='top'

@@ -58,22 +58,6 @@ const UserPerformance = () => {
     setIsCriteriaModalOpen(false);
   };
 
-  // Mock data
-  // const mockdata = [
-  //   {
-  //     title: 'Opiskelija toimii tieto- ja viestintätekniikan työtehtävissä',
-  //   },
-  //   {
-  //     title:
-  //       'Opiskelija tekee tiedonhakua ja ratkaisee tieto- ja viestintätekniikan ongelmia',
-  //   },
-  //   {
-  //     title: 'Opiskelija käyttää tietoteknistä ympäristöä',
-  //   },
-  // ];
-
-  // Evaluation data
-
   const buttonStyle = {
     color: 'var(--saukko-main-white)',
     border: 'var(--saukko-main-black)',
@@ -215,7 +199,7 @@ const UserPerformance = () => {
                   />
                 </div>
               </div>
-              {unit.assessments.map((assess, index) => (
+              {/* {unit.assessments.map((assess, index) => (
                 <div key={index}>
                   <p>Assessment: {assess.name.fi}</p>
                   <p>Student: {assess.answer}</p>
@@ -223,7 +207,7 @@ const UserPerformance = () => {
                   <p>Teacher: {assess.answerTeacher}</p>
                 </div>
               ))}
-
+ */}
               {user?.role === 'teacher' ? (
                 <TeacherPerformanceFeedBack
                   selectedValues={selectedValues}
