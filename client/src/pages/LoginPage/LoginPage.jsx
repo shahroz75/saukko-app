@@ -103,7 +103,7 @@ const LoginPage = () => {
                   <p className="error-message">{errorMessage}</p>
                 </div>
                 <div className='forgot-password-link'>
-                  <a href='/forgot-password'>Unohtuiko salasana?</a>
+                  <a href='/forgot-password' id="forgot-password-link">Unohtuiko salasana?</a>
                 </div>
               </div>
             )}
