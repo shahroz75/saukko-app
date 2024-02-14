@@ -24,28 +24,28 @@ const UserNav = () => {
         {/* Customer */}
         {user && user.role === 'customer' &&
           <div className={`userNav__icons ${user.role}`}>
-            <Icon icon="ic:outline-home" onClick={() => navigate('/unit-list')}/>
-            <Icon icon="bx:file" onClick={() => navigate('/contract-info')}/>
-            <Icon icon="mdi:user-outline" onClick={() => navigate('/profile')}/>
+            <Icon id="home-icon" icon="ic:outline-home" onClick={() => navigate('/unit-list')}/>
+            <Icon id="file-icon" icon="bx:file" onClick={() => navigate('/contract-info')}/>
+            <Icon id="profile-icon" icon="mdi:user-outline" onClick={() => navigate('/profile')}/>
           </div>
         }
 
         {/* Supervisor */}
         {user && user.role === 'supervisor' &&
           <div className={`userNav__icons ${user.role}`}>
-            <Icon icon="ic:outline-home" onClick={() => navigate('/customer-list')}/>
-            {evaluation && <Icon icon="bx:file" onClick={() => navigate('/contract-info')}/>}
-            <Icon icon="mdi:user-outline" onClick={() => navigate('/profile')}/>
+            <Icon id="home-icon" icon="ic:outline-home" onClick={() => navigate('/customer-list')}/>
+            {evaluation && <Icon id="file-icon" icon="bx:file" onClick={() => navigate('/contract-info')}/>}
+            <Icon id="profile-icon" icon="mdi:user-outline" onClick={() => navigate('/profile')}/>
           </div>
         }
 
         {/* Teacher */}
         {user && user.role === 'teacher' &&
           <div className={`userNav__icons ${user.role}`}>
-            <Icon icon="ic:outline-home" onClick={() => navigate('/customer-list')}/>
+            <Icon id="home-icon" icon="ic:outline-home" onClick={() => navigate('/customer-list')}/>
             {evaluation && <Icon icon="bx:file" onClick={() => navigate('/contract-info')}/>}
-            <Icon icon="mingcute:group-line" onClick={() => navigate('/admin-menu')}/>
-            <Icon icon="mdi:user-outline" onClick={() => navigate('/profile')}/>
+            <Icon id="file-icon" icon="mingcute:group-line" onClick={() => navigate('/admin-menu')}/>
+            <Icon id="profile-icon" icon="mdi:user-outline" onClick={() => navigate('/profile')}/>
           </div>
         }
     </main>
